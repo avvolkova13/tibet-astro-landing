@@ -1,0 +1,53 @@
+.screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 390 / 944;
+  overflow: hidden;
+  container-type: inline-size;
+  background: #2a0c0c;
+}
+
+.screenImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.chrome {
+  clip-path: inset(0 0 87.9% 0);
+}
+
+.silhouettes {
+  clip-path: inset(12% 20% 53.4% 20%);
+}
+
+.indicators {
+  clip-path: inset(25.5% 20% 51.5% 20%);
+}
+
+.kalachakraCard {
+  clip-path: inset(47.7% 0 34.2% 0);
+}
+
+.bushmiCard {
+  clip-path: inset(65.5% 0 24.5% 0);
+}
+
+.details {
+  clip-path: inset(75.5% 0 10.5% 0);
+}
+
+.navigation {
+  clip-path: inset(89% 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenImage {
+    transition: none !important;
+  }
+}

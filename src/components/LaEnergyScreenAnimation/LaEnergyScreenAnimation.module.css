@@ -1,0 +1,540 @@
+.root {
+  --bg: #2a0c0c;
+  --secondary: #351515;
+  --inverse: #cbb4a2;
+  --text: #f3e8dd;
+  --inverseText: #2a0c0c;
+  --accent: #b38f6f;
+  position: relative;
+  width: calc(428px * var(--animation-scale));
+  height: calc(940px * var(--animation-scale));
+  transform-origin: top left;
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.root * {
+  box-sizing: border-box;
+}
+
+.root button {
+  font: inherit;
+}
+
+.phoneShell {
+  position: absolute;
+  inset: 0;
+  width: 428px;
+  height: 940px;
+  transform: scale(var(--animation-scale));
+  transform-origin: top left;
+  border-radius: 62px;
+  background:
+    linear-gradient(90deg, transparent 0 2px, #fff2df 2px 4px, #d33d10 4px 7px, #ffb15e 7px 10px, transparent 10px),
+    linear-gradient(180deg, #1d0a08, #240907 52%, #080202);
+  box-shadow:
+    0 0 134px 21px rgba(128, 16, 8, 0.9),
+    inset 0 0 0 2px rgba(255, 229, 203, 0.8),
+    inset 0 0 0 6px #c74316,
+    inset 0 0 0 9px #fff2da;
+  overflow: hidden;
+  animation: phoneIn 760ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.phoneGlow {
+  position: absolute;
+  inset: 72px 32px 68px;
+  border-radius: 48px;
+  box-shadow: inset 0 0 35px rgba(255, 105, 40, 0.4);
+  pointer-events: none;
+}
+
+.dynamicIsland {
+  position: absolute;
+  z-index: 8;
+  top: 25px;
+  left: 156px;
+  width: 120px;
+  height: 40px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 78% 43%, rgba(255, 98, 48, 0.26) 0 3px, transparent 4px),
+    linear-gradient(180deg, #140302 0%, #070101 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 205, 172, 0.68),
+    inset 0 0 16px rgba(255, 81, 28, 0.24),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.phoneRail {
+  position: absolute;
+  width: 4px;
+  border-radius: 8px;
+  background: linear-gradient(#ffede0, #f05c1b 35%, #fff0df);
+  box-shadow: 0 0 0 1px rgba(92, 13, 7, 0.8);
+}
+
+.phoneRail.left {
+  left: 0;
+}
+
+.phoneRail.right {
+  right: 0;
+  top: 373px;
+  height: 94px;
+}
+
+.phoneRail.top {
+  top: 291px;
+  height: 64px;
+}
+
+.phoneRail.mid {
+  top: 351px;
+  height: 61px;
+}
+
+.phoneRail.low {
+  top: 431px;
+  height: 58px;
+}
+
+.screen {
+  position: absolute;
+  left: 19px;
+  top: 19px;
+  width: 390px;
+  height: 886px;
+  overflow: hidden;
+  border-radius: 52px;
+  background:
+    radial-gradient(520px 880px at 50% 44%, rgba(78, 17, 17, 0.26) 0%, rgba(42, 12, 12, 0.97) 72%, #180606 100%),
+    var(--bg);
+  box-shadow:
+    inset 18px 0 28px rgba(0, 0, 0, 0.28),
+    inset -18px 0 28px rgba(0, 0, 0, 0.28),
+    inset 0 -26px 34px rgba(0, 0, 0, 0.36);
+}
+
+.statusBar {
+  position: absolute;
+  z-index: 7;
+  top: 29px;
+  left: 54px;
+  right: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.statusBar div {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.signal,
+.wifi,
+.battery {
+  display: block;
+  height: 12px;
+}
+
+.signal {
+  width: 18px;
+  background: linear-gradient(90deg, var(--text) 0 3px, transparent 3px 5px, var(--text) 5px 8px, transparent 8px 10px, var(--text) 10px 13px, transparent 13px 15px, var(--text) 15px 18px);
+  clip-path: polygon(0 100%, 0 64%, 16% 64%, 16% 100%, 28% 100%, 28% 48%, 44% 48%, 44% 100%, 56% 100%, 56% 28%, 72% 28%, 72% 100%, 84% 100%, 84% 8%, 100% 8%, 100% 100%);
+}
+
+.wifi {
+  width: 16px;
+  border: 3px solid var(--text);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-45deg);
+}
+
+.battery {
+  position: relative;
+  width: 25px;
+  border: 2px solid var(--text);
+  border-radius: 4px;
+}
+
+.battery::before {
+  content: "";
+  position: absolute;
+  inset: 2px 5px 2px 2px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 680ms cubic-bezier(.22,.72,.22,1), transform 760ms cubic-bezier(.22,.72,.22,1);
+}
+
+.reveal.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.screen > .reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.screen > .reveal * {
+  pointer-events: auto;
+}
+
+.topBar {
+  position: absolute;
+  z-index: 4;
+  top: 59px;
+  left: 16px;
+  width: 358px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+}
+
+.topBar h1 {
+  margin: 0;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.408px;
+  text-align: center;
+}
+
+.topBar button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(243, 232, 221, 0.14);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 35px;
+  line-height: 38px;
+  padding: 0 0 4px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.bodyStage {
+  position: absolute;
+  z-index: 2;
+  top: 119px;
+  left: 87.5px;
+  width: 215px;
+  height: 316px;
+}
+
+.bodyImage {
+  display: block;
+  width: 215px;
+  height: 316px;
+  object-fit: contain;
+}
+
+.pointLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 720ms cubic-bezier(.22,.72,.22,1), transform 760ms cubic-bezier(.22,.72,.22,1);
+}
+
+.pointLayer.pointsVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.laPoint {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  animation: pointGlow 2400ms ease-in-out 900ms infinite alternate;
+}
+
+.maleHip {
+  left: 18.5px;
+  top: 135px;
+}
+
+.maleFoot {
+  left: 34.5px;
+  top: 282px;
+}
+
+.femaleFoot {
+  left: 135.5px;
+  top: 275px;
+}
+
+.femaleHip {
+  left: 158.5px;
+  top: 135px;
+}
+
+.kalachakraCard,
+.bushmiCard {
+  position: absolute;
+  left: 16px;
+  width: 358px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.kalachakraCard {
+  top: 451px;
+  height: 152px;
+}
+
+.bushmiCard {
+  top: 619px;
+  height: 71px;
+}
+
+.cardTitle {
+  position: relative;
+  height: 36px;
+  background: var(--secondary);
+}
+
+.cardTitle img {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.cardTitle p {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.408px;
+  white-space: nowrap;
+}
+
+.cardTitle span {
+  color: var(--accent);
+}
+
+.twoColumnDescriptions {
+  display: grid;
+  grid-template-columns: 177px 177px;
+  gap: 4px;
+  height: 116px;
+  color: var(--inverseText);
+}
+
+.twoColumnDescriptions article,
+.singleDescription {
+  background: var(--inverse);
+  padding: 8px;
+  overflow: hidden;
+}
+
+.twoColumnDescriptions article:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+.twoColumnDescriptions article:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+.twoColumnDescriptions h2 {
+  margin: 0 0 4px;
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.408px;
+}
+
+.twoColumnDescriptions p,
+.singleDescription p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.408px;
+}
+
+.singleDescription {
+  height: 35px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  color: var(--inverseText);
+}
+
+.warningText {
+  position: absolute;
+  top: 704px;
+  left: 16px;
+  width: 358px;
+  margin: 0;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.408px;
+}
+
+.tabBar {
+  position: absolute;
+  z-index: 5;
+  top: 779px;
+  left: 0;
+  width: 390px;
+  height: 90px;
+  padding: 16px 25px 25px;
+}
+
+.tabBarInner {
+  position: relative;
+  width: 350px;
+  height: 49px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.tabBarInner::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tab {
+  position: relative;
+  width: 55px;
+  height: 49px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5px;
+  padding: 6px 0 7px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.41px;
+  text-align: center;
+}
+
+.tab:first-child {
+  width: 90px;
+  margin-right: -8px;
+}
+
+.tab:nth-child(2),
+.tab:nth-child(3),
+.tab:nth-child(4) {
+  margin-right: -8px;
+}
+
+.activeTab {
+  width: 90px;
+  padding-inline: 17px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.activeTab::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -0.5px;
+  border-radius: 999px;
+  background: var(--bg);
+}
+
+.iconWrap {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.iconWrap img {
+  position: absolute;
+  inset: 0;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.tab > span:not(.iconWrap) {
+  position: relative;
+  display: block;
+  width: 55px;
+}
+
+.homeIndicator {
+  position: absolute;
+  z-index: 7;
+  left: 123px;
+  bottom: 8px;
+  width: 144px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--text);
+}
+
+@keyframes phoneIn {
+  from {
+    opacity: 0;
+    transform: scale(calc(var(--animation-scale) * .975)) translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(var(--animation-scale)) translateY(0);
+  }
+}
+
+@keyframes pointGlow {
+  from {
+    filter: drop-shadow(0 0 0 rgba(244, 219, 184, 0));
+  }
+
+  to {
+    filter: drop-shadow(0 0 7px rgba(244, 219, 184, 0.24));
+  }
+}

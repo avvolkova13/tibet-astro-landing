@@ -1,0 +1,72 @@
+.screenImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.calendarScreen,
+.clockScreen {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  container-type: inline-size;
+  background:
+    radial-gradient(
+      ellipse 30.6cqw 108cqw at 48.9cqw -16cqw,
+      rgba(216, 184, 155, 0.15),
+      rgba(110, 58, 43, 0.075) 31%,
+      rgba(42, 12, 12, 0) 66%
+    ),
+    #2a0c0c;
+}
+
+.calendarScreen {
+  aspect-ratio: 390 / 922;
+}
+
+.clockScreen {
+  aspect-ratio: 390 / 972;
+}
+
+.calendarChrome {
+  clip-path: inset(0 0 78.42% 0);
+}
+
+.calendarMain {
+  clip-path: inset(21.58% 0 32.54% 0);
+}
+
+.calendarDetails {
+  clip-path: inset(68.87% 0 12.9% 0);
+}
+
+.calendarNavigation {
+  clip-path: inset(87.7% 0 0 0);
+}
+
+.clockChrome {
+  clip-path: inset(0 0 83.85% 0);
+}
+
+.clockDial {
+  clip-path: inset(16.15% 0 47.33% 0);
+}
+
+.clockContent {
+  clip-path: inset(52.67% 0 10.99% 0);
+}
+
+.clockNavigation {
+  clip-path: inset(88.99% 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenImage {
+    transition: none !important;
+  }
+}

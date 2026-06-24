@@ -1,0 +1,536 @@
+.root {
+  --bg: #2a0c0c;
+  --surface: #3f1b1b;
+  --surface-strong: #421818;
+  --text: #f3e8dd;
+  --accent: #b38f6f;
+  --muted: #cbb4a2;
+  --green: #8fc7a0;
+  --green-bg: #98d1a5;
+  --red-bg: #d59aa3;
+  position: relative;
+  width: calc(428px * var(--animation-scale));
+  height: calc(940px * var(--animation-scale));
+  transform-origin: top left;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
+.root * {
+  box-sizing: border-box;
+}
+
+.root button {
+  font: inherit;
+}
+
+.phoneShell {
+  position: absolute;
+  inset: 0;
+  width: 428px;
+  height: 940px;
+  transform: scale(var(--animation-scale));
+  transform-origin: top left;
+  border-radius: 62px;
+  background:
+    linear-gradient(90deg, transparent 0 2px, #fff2df 2px 4px, #d33d10 4px 7px, #ffb15e 7px 10px, transparent 10px),
+    linear-gradient(180deg, #1d0a08, #240907 52%, #080202);
+  box-shadow:
+    0 0 134px 21px rgba(128, 16, 8, 0.9),
+    inset 0 0 0 2px rgba(255, 229, 203, 0.8),
+    inset 0 0 0 6px #c74316,
+    inset 0 0 0 9px #fff2da;
+  overflow: hidden;
+  animation: phoneIn 760ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.phoneGlow {
+  position: absolute;
+  inset: 72px 32px 68px;
+  border-radius: 48px;
+  box-shadow: inset 0 0 35px rgba(255, 105, 40, 0.4);
+  pointer-events: none;
+}
+
+.phoneRail {
+  position: absolute;
+  width: 4px;
+  border-radius: 8px;
+  background: linear-gradient(#ffede0, #f05c1b 35%, #fff0df);
+  box-shadow: 0 0 0 1px rgba(92, 13, 7, 0.8);
+}
+
+.phoneRail.left {
+  left: 0;
+}
+
+.phoneRail.right {
+  right: 0;
+  top: 373px;
+  height: 94px;
+}
+
+.phoneRail.top {
+  top: 291px;
+  height: 64px;
+}
+
+.phoneRail.mid {
+  top: 351px;
+  height: 61px;
+}
+
+.phoneRail.low {
+  top: 431px;
+  height: 58px;
+}
+
+.screen {
+  position: absolute;
+  left: 19px;
+  top: 15px;
+  width: 390px;
+  height: 907px;
+  overflow: hidden;
+  border-radius: 52px;
+  background:
+    radial-gradient(560px 960px at 50% 48%, rgba(78, 17, 17, 0.26) 0%, rgba(42, 12, 12, 0.96) 70%, #180606 100%),
+    var(--bg);
+  box-shadow:
+    inset 18px 0 28px rgba(0, 0, 0, 0.28),
+    inset -18px 0 28px rgba(0, 0, 0, 0.28),
+    inset 0 -26px 34px rgba(0, 0, 0, 0.36);
+}
+
+.statusBar {
+  position: absolute;
+  z-index: 7;
+  top: 29px;
+  left: 54px;
+  right: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.statusBar div {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.signal,
+.wifi,
+.battery {
+  display: block;
+  height: 12px;
+}
+
+.signal {
+  width: 18px;
+  background: linear-gradient(90deg, #fff 0 3px, transparent 3px 5px, #fff 5px 8px, transparent 8px 10px, #fff 10px 13px, transparent 13px 15px, #fff 15px 18px);
+  clip-path: polygon(0 100%, 0 64%, 16% 64%, 16% 100%, 28% 100%, 28% 48%, 44% 48%, 44% 100%, 56% 100%, 56% 28%, 72% 28%, 72% 100%, 84% 100%, 84% 8%, 100% 8%, 100% 100%);
+}
+
+.wifi {
+  width: 16px;
+  border: 3px solid #fff;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-45deg);
+}
+
+.battery {
+  position: relative;
+  width: 25px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+}
+
+.battery::before {
+  content: "";
+  position: absolute;
+  inset: 2px 5px 2px 2px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 680ms cubic-bezier(.22,.72,.22,1), transform 760ms cubic-bezier(.22,.72,.22,1);
+}
+
+.reveal.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.screen > .reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.screen > .reveal * {
+  pointer-events: auto;
+}
+
+.topBar {
+  position: absolute;
+  z-index: 4;
+  top: 58px;
+  left: 16px;
+  width: 358px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+}
+
+.topBar h1 {
+  margin: 0;
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.topBar button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(243, 232, 221, 0.14);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(62, 27, 27, 0.38);
+  font-size: 35px;
+  line-height: 38px;
+  padding: 0 0 4px;
+}
+
+.dateTitle {
+  position: absolute;
+  top: 121px;
+  left: 16px;
+  width: 358px;
+  margin: 0;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.clockBlock {
+  position: absolute;
+  top: 140px;
+  left: 16px;
+  width: 358px;
+  height: 386px;
+}
+
+.clockBlock > img {
+  display: block;
+  width: 358px;
+  height: 355px;
+  object-fit: contain;
+}
+
+.planetLegend {
+  position: absolute;
+  top: 357px;
+  left: 0;
+  width: 358px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 9.25px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.specialPeriods {
+  position: absolute;
+  top: 532px;
+  left: 16px;
+  width: 358px;
+}
+
+.specialPeriods h2,
+.breathingCycles h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.periodGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.periodCard {
+  height: 86px;
+  padding: 9px 8px 8px;
+  border-radius: 14px;
+  background: rgba(74, 30, 30, 0.92);
+  overflow: hidden;
+}
+
+.badge {
+  display: inline-flex;
+  height: 22px;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 5px;
+  color: #2a0c0c;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.goodBadge {
+  background: var(--green-bg);
+}
+
+.badBadge {
+  background: var(--red-bg);
+}
+
+.periodTimes {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 10px;
+  row-gap: 0;
+  align-items: center;
+  margin-top: 5px;
+  color: var(--accent);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+}
+
+.periodTimes strong {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.periodTimes i {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.periodCard p {
+  margin: 4px 0 0;
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.breathingCycles {
+  position: absolute;
+  top: 692px;
+  left: 16px;
+  width: 358px;
+}
+
+.breathingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.breathingGrid article {
+  height: 58px;
+  padding: 7px 8px;
+  border-radius: 12px;
+  background: rgba(74, 30, 30, 0.92);
+}
+
+.breathingGrid h3 {
+  margin: 0 0 4px;
+  color: var(--text);
+  font-family: Literata, Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.breathingGrid p {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin: 0 0 2px;
+  color: var(--text);
+  font-size: 8.5px;
+  font-weight: 400;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.moonDot,
+.sunDot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 999px;
+}
+
+.moonDot {
+  background: #d2dcff;
+}
+
+.sunDot {
+  background: #e8bc83;
+}
+
+.tabBar {
+  position: absolute;
+  z-index: 5;
+  top: 800px;
+  left: 0;
+  width: 390px;
+  height: 90px;
+  padding: 16px 25px 25px;
+}
+
+.tabBarInner {
+  position: relative;
+  width: 350px;
+  height: 49px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.tabBarInner::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tab {
+  position: relative;
+  width: 55px;
+  height: 49px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5px;
+  padding: 6px 0 7px;
+  color: var(--accent);
+  opacity: 0.7;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.41px;
+  text-align: center;
+}
+
+.tab:first-child {
+  width: 90px;
+  margin-right: -8px;
+}
+
+.tab:nth-child(2),
+.tab:nth-child(4) {
+  margin-right: -8px;
+}
+
+.activeTab {
+  width: 90px;
+  padding-inline: 17px;
+  color: var(--text);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.activeTab::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -0.5px;
+  border-radius: 999px;
+  background: var(--bg);
+}
+
+.iconWrap {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.iconWrap img {
+  position: absolute;
+  inset: 0;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.tab > span:not(.iconWrap) {
+  position: relative;
+  display: block;
+  width: 55px;
+}
+
+.homeIndicator {
+  position: absolute;
+  z-index: 7;
+  left: 123px;
+  bottom: 8px;
+  width: 144px;
+  height: 5px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+@keyframes phoneIn {
+  from {
+    opacity: 0;
+    transform: scale(calc(var(--animation-scale) * .975)) translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(var(--animation-scale)) translateY(0);
+  }
+}

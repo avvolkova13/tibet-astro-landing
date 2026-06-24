@@ -1,0 +1,81 @@
+.root {
+  position: relative;
+  display: flex;
+  width: 320px;
+  height: 411px;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  pointer-events: none;
+  contain: layout style;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.root :global(.relative) {
+  position: relative;
+}
+
+.root :global(.absolute) {
+  position: absolute;
+}
+
+.root :global(.inset-0) {
+  inset: 0;
+}
+
+.root :global(.flex) {
+  display: flex;
+}
+
+.root :global(.items-center) {
+  align-items: center;
+}
+
+.root :global(.justify-center) {
+  justify-content: center;
+}
+
+.root :global(.z-10) {
+  z-index: 10;
+}
+
+.root :global(.z-20) {
+  z-index: 20;
+}
+
+.root :global(.w-\[20rem\]) {
+  width: 320px;
+}
+
+.root :global(.h-auto) {
+  height: auto;
+}
+
+.root :global(.w-\[600px\]) {
+  width: 600px;
+}
+
+.root :global(.h-\[600px\]) {
+  height: 600px;
+}
+
+.root :global(.rounded-full) {
+  border-radius: 999px;
+}
+
+.root :global(.blur-3xl) {
+  filter: blur(64px);
+}
+
+.root :global(.blur-md) {
+  filter: blur(12px);
+}
+
+.root :global(.blur-sm) {
+  filter: blur(4px);
+}
+
+.root :global(.opacity-50) {
+  opacity: 0.5;
+}
