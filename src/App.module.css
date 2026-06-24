@@ -2025,12 +2025,6 @@
   will-change: transform, opacity;
 }
 
-.todayStandaloneSection .todayStage,
-.todayStandaloneCopy > div {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
 @media (min-width: 981px) {
   .todayStandaloneSection .todayStandaloneCopy {
     position: absolute;

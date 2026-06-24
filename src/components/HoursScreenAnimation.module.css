@@ -41,6 +41,9 @@
     inset 0 0 0 6px #c74316,
     inset 0 0 0 9px #fff2da;
   overflow: hidden;
+}
+
+.root.isPlaying .phoneShell {
   animation: phoneIn 760ms cubic-bezier(.2,.8,.2,1) both;
 }
 

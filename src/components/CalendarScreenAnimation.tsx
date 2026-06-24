@@ -88,7 +88,7 @@ export default function CalendarScreenAnimation({
   autoPlay = true,
   scale = 1,
 }: CalendarScreenAnimationProps) {
-  const [revealed, setRevealed] = useState(autoPlay ? 0 : revealDelays.length);
+  const [revealed, setRevealed] = useState(0);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -102,7 +102,7 @@ export default function CalendarScreenAnimation({
 
   return (
     <div
-      className={cx(styles.root, className)}
+      className={cx(styles.root, autoPlay && styles.isPlaying, className)}
       style={{ "--animation-scale": scale } as CSSProperties & Record<"--animation-scale", number>}
       aria-label="Animated Tibet Astro calendar screen"
     >

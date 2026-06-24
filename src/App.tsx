@@ -6,6 +6,7 @@ import {
   useState,
   type CSSProperties,
   type ReactNode,
+  type RefObject,
 } from 'react';
 import {
   AnimatePresence,
@@ -320,20 +321,22 @@ function HeroScene({
 
 const MemoHeroScene = memo(HeroScene);
 
-function TodayCopy({ className = '' }: { className?: string }) {
+function TodayCopy({ className = '', inView }: { className?: string; inView: boolean }) {
   return (
     <div className={`${styles.sectionCopy} ${className}`}>
-      <Reveal>
-        <span className={styles.kicker}>Всё самое важное о дне</span>
-        <h2>Что сегодня за день?</h2>
-      </Reveal>
-      <Reveal delay={0.08}>
+      <div>
+        <motion.span className={styles.kicker} {...getOuterRevealProps(inView, 0.18)}>
+          Всё самое важное о дне
+        </motion.span>
+        <motion.h2 {...getOuterRevealProps(inView, 0.08)}>Что сегодня за день?</motion.h2>
+      </div>
+      <motion.div {...getOuterRevealProps(inView, 0.24)}>
         <p>
           Откройте приложение и за несколько секунд получите полную
           характеристику сегодняшнего дня — от рекомендаций и особых событий до
           влияния на разные годы рождения.
         </p>
-      </Reveal>
+      </motion.div>
     </div>
   );
 }
@@ -756,56 +759,67 @@ function Reveal({
   );
 }
 
-function LivingPlanningDemo() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { once: true, amount: 0.08 });
+const outerRevealEase = [0.22, 1, 0.36, 1] as const;
+
+function getOuterRevealProps(inView: boolean, delay = 0) {
+  return {
+    initial: { opacity: 0, y: 18 },
+    animate: inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 },
+    transition: { duration: 0.82, delay, ease: outerRevealEase },
+  };
+}
+
+function LivingPlanningDemo({ inView }: { inView: boolean }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className={styles.dualPhones} ref={rootRef}>
+    <div className={styles.dualPhones}>
       <motion.div
         className={styles.calendarPhoneStage}
-        initial={reduceMotion ? false : { opacity: 0, x: 32, y: 28, scale: 0.95 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
         animate={
           inView
-            ? {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                scale: 1,
-              }
-            : { opacity: 0, x: 32, y: 28, scale: 0.95 }
+            ? { opacity: 1, y: 0 }
+            : { opacity: 0, y: 18 }
         }
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.82, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
       >
-        <CalendarScreenAnimation className={styles.calendarPhone} scale={0.7} />
+        <CalendarScreenAnimation
+          key={inView ? 'calendar-play' : 'calendar-idle'}
+          autoPlay={inView}
+          className={styles.calendarPhone}
+          scale={0.7}
+        />
       </motion.div>
     </div>
   );
 }
 
-function ClockSpacerDemo() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { once: true, amount: 0.08 });
+function ClockSpacerDemo({ inView }: { inView: boolean }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className={`${styles.dualPhones} ${styles.clockSpacerPhones}`} ref={rootRef}>
+    <div className={`${styles.dualPhones} ${styles.clockSpacerPhones}`}>
       <motion.div
         className={styles.clockPhoneStage}
-        initial={reduceMotion ? false : { opacity: 0, x: -54, y: 45, scale: 0.92 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
         animate={
           inView
-            ? { opacity: 1, x: 0, y: 0, scale: 1 }
-            : { opacity: 0, x: -54, y: 45, scale: 0.92 }
+            ? { opacity: 1, y: 0 }
+            : { opacity: 0, y: 18 }
         }
         transition={{
-          duration: 1,
-          delay: reduceMotion ? 0 : 0.5,
+          duration: 0.82,
+          delay: reduceMotion ? 0 : 0.12,
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-        <HoursScreenAnimation className={styles.clockPhone} scale={0.7} />
+        <HoursScreenAnimation
+          key={inView ? 'hours-play' : 'hours-idle'}
+          autoPlay={inView}
+          className={styles.clockPhone}
+          scale={0.7}
+        />
       </motion.div>
     </div>
   );
@@ -816,14 +830,17 @@ function StackedSection({
   className,
   id,
   layer,
+  sectionRef,
 }: {
   children: ReactNode;
   className: string;
   id?: string;
   layer: number;
+  sectionRef?: RefObject<HTMLElement | null>;
 }) {
   return (
     <section
+      ref={sectionRef}
       className={`${styles.stackedSection} ${className}`}
       id={id}
       style={{ zIndex: layer }}
@@ -835,6 +852,18 @@ function StackedSection({
 
 function App() {
   const reduceMotion = useReducedMotion();
+  const todaySectionRef = useRef<HTMLElement>(null);
+  const planningSectionRef = useRef<HTMLElement>(null);
+  const clockSectionRef = useRef<HTMLElement>(null);
+  const laSectionRef = useRef<HTMLElement>(null);
+  const todayPhoneRef = useRef<HTMLDivElement>(null);
+  const laPhoneRef = useRef<HTMLDivElement>(null);
+  const todaySectionInView = useInView(todaySectionRef, { once: true, amount: 0.2 });
+  const planningSectionInView = useInView(planningSectionRef, { once: true, amount: 0.2 });
+  const clockSectionInView = useInView(clockSectionRef, { once: true, amount: 0.2 });
+  const laSectionInView = useInView(laSectionRef, { once: true, amount: 0.2 });
+  const todayPhoneInView = useInView(todayPhoneRef, { once: true, amount: 0.24 });
+  const laPhoneInView = useInView(laPhoneRef, { once: true, amount: 0.2 });
   const { scrollYProgress } = useScroll();
   const ambientOne = useTransform(scrollYProgress, [0, 1], [0, 220]);
   const ambientTwo = useTransform(scrollYProgress, [0, 1], [0, -180]);
@@ -850,117 +879,132 @@ function App() {
         className={`${styles.todaySection} ${styles.todayStandaloneSection}`}
         id="today"
         layer={2}
+        sectionRef={todaySectionRef}
       >
-          <img
+          <motion.img
             src={assets.todaySparkles}
             alt=""
             className={styles.todaySparkles}
             aria-hidden="true"
+            {...getOuterRevealProps(todaySectionInView, 0)}
           />
-          <img
+          <motion.img
             src={assets.todayOrnament}
             alt=""
             className={styles.todayOrnament}
             aria-hidden="true"
+            {...getOuterRevealProps(todaySectionInView, 0.06)}
           />
           <motion.div
+            ref={todayPhoneRef}
             className={styles.todayStage}
-            initial={{ opacity: 0, y: 34, scale: 0.965 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.24 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            {...getOuterRevealProps(todaySectionInView, 0.12)}
           >
             <div className={styles.todayPhoneReveal}>
-              <TodayScreenAnimation className={styles.todayPhone} scale={0.7} />
+              <TodayScreenAnimation
+                key={todayPhoneInView ? 'today-play' : 'today-idle'}
+                autoPlay={todayPhoneInView}
+                className={styles.todayPhone}
+                scale={0.7}
+              />
             </div>
           </motion.div>
-          <TodayCopy className={styles.todayStandaloneCopy} />
+          <TodayCopy className={styles.todayStandaloneCopy} inView={todaySectionInView} />
       </StackedSection>
 
-      <StackedSection className={styles.planningSection} layer={3}>
-        <img
+      <StackedSection className={styles.planningSection} layer={3} sectionRef={planningSectionRef}>
+        <motion.img
           src={assets.todaySparkles}
           alt=""
           className={styles.planningSparkles}
           aria-hidden="true"
+          {...getOuterRevealProps(planningSectionInView, 0)}
         />
-        <img
+        <motion.img
           src={assets.planningCloud}
           alt=""
           className={styles.planningCloud}
           aria-hidden="true"
+          {...getOuterRevealProps(planningSectionInView, 0.06)}
         />
         <div className={styles.planningCopy}>
-          <h2>Ваш календарь</h2>
-          <span>Будьте на шаг впереди</span>
-          <p>
+          <motion.h2 {...getOuterRevealProps(planningSectionInView, 0.08)}>Ваш календарь</motion.h2>
+          <motion.span {...getOuterRevealProps(planningSectionInView, 0.18)}>Будьте на шаг впереди</motion.span>
+          <motion.p {...getOuterRevealProps(planningSectionInView, 0.24)}>
             Следите за благоприятными датами и планируйте важные дела заранее
-          </p>
+          </motion.p>
         </div>
-        <LivingPlanningDemo />
+        <LivingPlanningDemo inView={planningSectionInView} />
       </StackedSection>
 
-      <StackedSection className={styles.clockSection} layer={4}>
-        <img
+      <StackedSection className={styles.clockSection} layer={4} sectionRef={clockSectionRef}>
+        <motion.img
           src={assets.todaySparkles}
           alt=""
           className={styles.clockSparkles}
           aria-hidden="true"
+          {...getOuterRevealProps(clockSectionInView, 0)}
         />
-        <img
+        <motion.img
           src={assets.planningKnot}
           alt=""
           className={styles.clockKnot}
           aria-hidden="true"
+          {...getOuterRevealProps(clockSectionInView, 0.06)}
         />
         <div className={styles.clockCopy}>
-          <h2>Находите удачные часы</h2>
-          <span>Когда действовать?</span>
-          <p>
+          <motion.h2 {...getOuterRevealProps(clockSectionInView, 0.08)}>Находите удачные часы</motion.h2>
+          <motion.span {...getOuterRevealProps(clockSectionInView, 0.18)}>Когда действовать?</motion.span>
+          <motion.p {...getOuterRevealProps(clockSectionInView, 0.24)}>
             Узнайте, какое время дня считается наиболее благоприятным для ваших
             планов.
-          </p>
+          </motion.p>
         </div>
-        <ClockSpacerDemo />
+        <ClockSpacerDemo inView={clockSectionInView} />
       </StackedSection>
 
-      <StackedSection className={styles.laSection} layer={5}>
-        <img
+      <StackedSection className={styles.laSection} layer={5} sectionRef={laSectionRef}>
+        <motion.img
           src={assets.todaySparkles}
           alt=""
           className={styles.laSparkles}
           aria-hidden="true"
+          {...getOuterRevealProps(laSectionInView, 0)}
         />
-        <img
+        <motion.img
           src={assets.laFlower}
           alt=""
           className={styles.laFlower}
           aria-hidden="true"
+          {...getOuterRevealProps(laSectionInView, 0.06)}
         />
         <div className={styles.laCopy}>
-          <h2>
+          <motion.h2 {...getOuterRevealProps(laSectionInView, 0.08)}>
             Больше,
             <br />
             чем календарь
-          </h2>
-          <span>Познакомьтесь с энергией</span>
-          <div className={styles.laDescription}>
+          </motion.h2>
+          <motion.span {...getOuterRevealProps(laSectionInView, 0.18)}>Познакомьтесь с энергией</motion.span>
+          <motion.div className={styles.laDescription} {...getOuterRevealProps(laSectionInView, 0.24)}>
             <p>Одна из ключевых традиций тибетского календаря</p>
             <p>
               Каждый день приложение показывает движение энергии ЛА
               <br />в традициях Калачакры и Бушми.
             </p>
-          </div>
+          </motion.div>
         </div>
         <div className={styles.laVisual}>
           <motion.div
+            ref={laPhoneRef}
             className={styles.laPhoneReveal}
-            initial={{ opacity: 0, y: 34, scale: 0.965 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            {...getOuterRevealProps(laSectionInView, 0.12)}
           >
-            <LaEnergyScreenAnimation className={styles.laPhone} scale={0.7} />
+            <LaEnergyScreenAnimation
+              key={laPhoneInView ? 'la-play' : 'la-idle'}
+              autoPlay={laPhoneInView}
+              className={styles.laPhone}
+              scale={0.7}
+            />
           </motion.div>
         </div>
       </StackedSection>

@@ -41,7 +41,7 @@ export default function HoursScreenAnimation({
   autoPlay = true,
   scale = 1,
 }: HoursScreenAnimationProps) {
-  const [revealed, setRevealed] = useState(autoPlay ? 0 : revealDelays.length);
+  const [revealed, setRevealed] = useState(0);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -55,7 +55,7 @@ export default function HoursScreenAnimation({
 
   return (
     <div
-      className={cx(styles.root, className)}
+      className={cx(styles.root, autoPlay && styles.isPlaying, className)}
       style={{ "--animation-scale": scale } as CSSProperties & Record<"--animation-scale", number>}
       aria-label="Animated Tibet Astro hours screen"
     >

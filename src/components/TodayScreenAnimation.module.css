@@ -43,6 +43,9 @@
     inset 0 0 0 9px #fff2da;
   padding: 55px 19px 41px;
   overflow: hidden;
+}
+
+.root.isPlaying .phoneShell {
   animation: phoneIn 760ms cubic-bezier(.2,.8,.2,1) both;
 }
 
@@ -387,6 +390,10 @@
 
 .activeDay .dot {
   bottom: 8px;
+}
+
+.smallDay .dot {
+  bottom: 3px;
 }
 
 .dot.red,

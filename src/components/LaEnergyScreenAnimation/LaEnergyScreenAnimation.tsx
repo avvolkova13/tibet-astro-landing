@@ -46,7 +46,7 @@ export default function LaEnergyScreenAnimation({
   autoPlay = true,
   scale = 1,
 }: LaEnergyScreenAnimationProps) {
-  const [revealed, setRevealed] = useState(autoPlay ? 0 : revealDelays.length);
+  const [revealed, setRevealed] = useState(0);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -60,7 +60,7 @@ export default function LaEnergyScreenAnimation({
 
   return (
     <div
-      className={cx(styles.root, className)}
+      className={cx(styles.root, autoPlay && styles.isPlaying, className)}
       style={{ "--animation-scale": scale } as CSSProperties & Record<"--animation-scale", number>}
       aria-label="Animated Tibet Astro LA energy screen"
     >

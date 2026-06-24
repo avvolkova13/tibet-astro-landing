@@ -153,7 +153,7 @@ export default function TodayScreenAnimation({
   const [activeState, setActiveState] = useState(0);
   const [contentState, setContentState] = useState(0);
   const [contentChanging, setContentChanging] = useState(false);
-  const [revealed, setRevealed] = useState(autoPlay ? 0 : revealDelays.length);
+  const [revealed, setRevealed] = useState(0);
 
   useEffect(() => {
     if (!autoPlay) return;
@@ -189,7 +189,7 @@ export default function TodayScreenAnimation({
 
   return (
     <div
-      className={cx(styles.root, className)}
+      className={cx(styles.root, autoPlay && styles.isPlaying, className)}
       style={{ "--animation-scale": scale } as CSSProperties & Record<"--animation-scale", number>}
       aria-label="Animated Tibet Astro today screen"
     >
@@ -402,4 +402,3 @@ function TabBar() {
     </nav>
   );
 }
-
