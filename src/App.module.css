@@ -4654,24 +4654,22 @@
   }
 
   .finalCta {
-    min-height: 100svh;
-    height: auto;
-    padding: clamp(2.25rem, 7svh, 3.5rem) max(1rem, env(safe-area-inset-right)) clamp(1.5rem, 5svh, 2.5rem) max(1rem, env(safe-area-inset-left));
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(7.5rem, 18svh) auto minmax(12rem, 25svh) auto;
-    gap: clamp(0.85rem, 2.4svh, 1.25rem);
-    align-content: center;
-    justify-items: center;
+    --cta-mobile-height: 216.4103vw;
+    --cta-mobile-offset-y: max(0px, calc((100svh - var(--cta-mobile-height)) / 2));
+    position: relative;
+    min-height: max(100svh, var(--cta-mobile-height));
+    height: max(100svh, var(--cta-mobile-height));
+    padding: 0;
+    display: block;
+    border-radius: 0;
     background:
-      radial-gradient(circle at 50% 33%, rgba(130, 15, 10, 0.82), rgba(42, 12, 12, 0.98) 58%, #120305 100%),
-      url('/assets/final-cta/background.png') center center / cover no-repeat,
+      url('/assets/final-cta/background.png') calc(50% + 134.6vw) calc(var(--cta-mobile-offset-y) - 7.95vw) / 371.28vw 278.46vw no-repeat,
       #2a0c0c;
   }
 
   .finalCta::before,
   .finalCta::after {
-    position: relative;
+    position: absolute;
     z-index: 1;
     display: block;
     pointer-events: none;
@@ -4681,21 +4679,22 @@
   }
 
   .finalCta::before {
-    grid-row: 1;
-    width: min(100%, 28rem);
-    height: 100%;
-    background-image: url('/assets/final-cta/hands-rotated.png');
-    background-position: center bottom;
-    opacity: 0.94;
+    top: calc(var(--cta-mobile-offset-y) - 12.05vw);
+    left: -38.46vw;
+    width: 211.03vw;
+    height: 153.59vw;
+    background-image: url('/assets/final-cta/hands-front.png');
   }
 
   .finalCta::after {
-    grid-row: 3;
-    width: min(100%, 28rem);
-    height: 100%;
-    background-image: url('/assets/final-cta/hands-front.png');
-    background-position: center center;
-    opacity: 0.96;
+    top: calc(var(--cta-mobile-offset-y) + 61.03vw);
+    left: -102.05vw;
+    width: 210.89vw;
+    height: 153.51vw;
+    background-image: url('/assets/final-cta/hands-rotated.png');
+    clip-path: inset(9% 0 0 0);
+    transform: rotate(-9deg);
+    transform-origin: center center;
   }
 
   .finalCtaFrame {
@@ -4703,15 +4702,11 @@
   }
 
   .finalCta .finalInner {
-    position: relative;
-    inset: auto;
-    grid-row: 2;
+    position: absolute;
+    inset: 0;
     z-index: 3;
-    width: min(100%, calc(100vw - 2rem));
+    width: 100%;
     margin: 0;
-    display: grid;
-    justify-items: center;
-    gap: clamp(0.8rem, 2svh, 1rem);
     text-align: center;
   }
 
@@ -4722,42 +4717,57 @@
   }
 
   .finalCta .finalInner h2 {
-    width: min(100%, 22rem);
-    max-width: 22rem;
-    font-size: clamp(1.8rem, 8vw, 2.35rem);
-    line-height: 1.08;
-    letter-spacing: -0.018rem;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    position: absolute;
+    top: calc(var(--cta-mobile-offset-y) + 72.82vw);
+    right: 0;
+    left: 0;
+    width: 90vw;
+    max-width: 24.2rem;
+    margin: 0 auto;
+    font-size: clamp(1.442rem, 6.154vw, 1.692rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.026rem;
+    text-transform: uppercase;
   }
 
   .finalCta .finalInner p {
-    width: min(100%, 20rem);
-    max-width: 20rem;
-    margin-top: 0;
-    font-size: clamp(0.95rem, 3.75vw, 1.05rem);
-    line-height: 1.25;
-    white-space: normal;
+    position: absolute;
+    top: calc(var(--cta-mobile-offset-y) + 99.23vw);
+    right: 0;
+    left: 0;
+    width: 82.31vw;
+    max-width: 22.14rem;
+    margin: 0 auto;
+    color: var(--text);
+    font-size: clamp(0.962rem, 4.103vw, 1.128rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.0256rem;
   }
 
   .finalCta .heroStoreRow {
-    position: relative;
-    inset: auto;
-    grid-row: 4;
+    position: absolute;
+    top: calc(var(--cta-mobile-offset-y) + 113.08vw);
+    right: auto;
+    bottom: auto;
+    left: 4.102vw;
     z-index: 4;
-    width: min(16.5rem, calc(100vw - 2rem));
+    width: 91.795vw;
     margin: 0;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.45rem;
+    gap: 3.846vw;
   }
 
   .finalCta .heroStoreButton {
-    height: 2.25rem;
+    height: 14.36vw;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .finalCta .googlePlayLockup,
   .finalCta .appStoreLockup {
-    transform: scale(0.56);
+    transform: scale(0.78);
   }
 }
