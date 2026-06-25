@@ -2238,6 +2238,19 @@
     #120408;
 }
 
+.heroScrubReduced .heroScrubHero.hero {
+  position: relative;
+  inset: auto;
+  height: 100svh;
+  min-height: 38rem;
+}
+
+.heroScrubReduced .heroScrubStory {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+}
+
 .heroScrubReduced .todaySection {
   z-index: 2;
 }
