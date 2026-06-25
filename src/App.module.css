@@ -4469,9 +4469,10 @@
 
 @media (max-width: 980px) {
   .stackedSection {
-    position: relative;
-    top: auto;
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    min-height: 100svh;
+    overflow: clip;
   }
 
   .todayStandaloneSection,
@@ -4479,7 +4480,7 @@
   .clockSection,
   .laSection {
     height: auto;
-    min-height: auto;
+    min-height: 100svh;
     padding: clamp(4.5rem, 12vw, 6rem) max(1rem, env(safe-area-inset-left)) clamp(4.75rem, 13vw, 6.5rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr);

@@ -443,9 +443,35 @@ function HeroScrubSection() {
   const isMobileViewport = useMobileViewport();
   const [progress, setProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
+  const [videoMetadataReady, setVideoMetadataReady] = useState(false);
+  const [mobileVideoEnabled, setMobileVideoEnabled] = useState(
+    () => !getInitialMobileViewport(),
+  );
 
   useEffect(() => {
-    if (reduceMotion || isMobileViewport) {
+    setVideoReady(false);
+    setVideoMetadataReady(false);
+
+    if (reduceMotion) {
+      setMobileVideoEnabled(false);
+      return;
+    }
+
+    if (!isMobileViewport) {
+      setMobileVideoEnabled(true);
+      return;
+    }
+
+    setMobileVideoEnabled(false);
+    const frame = window.requestAnimationFrame(() => {
+      setMobileVideoEnabled(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMobileViewport, reduceMotion]);
+
+  useEffect(() => {
+    if (reduceMotion || (isMobileViewport && !videoMetadataReady)) {
       return;
     }
 
@@ -544,7 +570,7 @@ function HeroScrubSection() {
       window.removeEventListener('scroll', readScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [isMobileViewport, reduceMotion]);
+  }, [isMobileViewport, reduceMotion, videoMetadataReady]);
 
   const scrollToSecondFrame = useCallback(() => {
     const wrapper = wrapperRef.current;
@@ -560,7 +586,7 @@ function HeroScrubSection() {
     });
   }, [reduceMotion]);
 
-  if (reduceMotion || isMobileViewport) {
+  if (reduceMotion) {
     return (
       <div className={styles.heroScrubReduced}>
         <MemoHeroScene className={styles.heroScrubHero} />
@@ -570,6 +596,9 @@ function HeroScrubSection() {
       </div>
     );
   }
+
+  const videoSrc = !isMobileViewport || mobileVideoEnabled ? '/hero-scrub.mp4' : undefined;
+  const showScrubVideo = Boolean(videoSrc) && (!isMobileViewport || videoMetadataReady);
 
   const blockOneOpacity =
     progress <= 0.36
@@ -592,25 +621,29 @@ function HeroScrubSection() {
           alt=""
           aria-hidden="true"
         />
-        <video
-          ref={videoRef}
-          className={styles.heroScrubVideo}
-          src="/hero-scrub.mp4"
-          poster="/hero-poster.jpg"
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          style={{ opacity: progress > 0.002 ? 1 : 0 }}
-          onLoadedMetadata={() => {
-            const video = videoRef.current;
-            if (video) {
-              video.pause();
-              video.currentTime = 0;
-              currentTimeRef.current = 0;
-            }
-          }}
-          onCanPlayThrough={() => setVideoReady(true)}
+          <video
+            ref={videoRef}
+            className={styles.heroScrubVideo}
+            src={videoSrc}
+            poster="/hero-poster.jpg"
+            muted
+            playsInline
+            preload={isMobileViewport ? 'metadata' : 'auto'}
+            disablePictureInPicture
+            style={{ opacity: showScrubVideo && progress > 0.002 ? 1 : 0 }}
+            onLoadedMetadata={() => {
+              const video = videoRef.current;
+              if (video) {
+                video.pause();
+                video.currentTime = 0;
+                currentTimeRef.current = 0;
+                setVideoMetadataReady(true);
+                if (isMobileViewport) {
+                  setVideoReady(true);
+                }
+              }
+            }}
+            onCanPlayThrough={() => setVideoReady(true)}
         />
         <div className={styles.heroScrubWatermarkCover} aria-hidden="true" />
         <div
