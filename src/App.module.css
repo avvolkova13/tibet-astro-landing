@@ -4480,7 +4480,7 @@
   .clockSection,
   .laSection {
     height: auto;
-    min-height: 100svh;
+    min-height: max(100svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(24rem, 48vw, 28rem)));
     padding: clamp(4.5rem, 12vw, 6rem) max(1rem, env(safe-area-inset-left)) clamp(4.75rem, 13vw, 6.5rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -4497,6 +4497,8 @@
     top: auto;
     left: auto;
     width: var(--landing-phone-width);
+    height: calc(var(--landing-phone-width) * 658 / 300);
+    aspect-ratio: 300 / 658;
     margin: 0 auto;
     order: 2;
   }
@@ -4634,6 +4636,7 @@
   .planningSection,
   .clockSection,
   .laSection {
+    min-height: max(100svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(21rem, 64vw, 25rem)));
     padding-top: clamp(3.75rem, 11vw, 4.75rem);
     padding-bottom: clamp(4.25rem, 12vw, 5.75rem);
     gap: clamp(1.5rem, 5vw, 2.35rem);
@@ -4648,5 +4651,43 @@
   .clockKnot,
   .laFlower {
     display: none;
+  }
+
+  .finalCta {
+    min-height: max(100svh, 52rem);
+    height: auto;
+  }
+
+  .finalCta .finalInner {
+    inset: clamp(4.75rem, 14vw, 6.25rem) max(1rem, env(safe-area-inset-right)) auto max(1rem, env(safe-area-inset-left));
+    width: auto;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .finalCta .finalInner h2,
+  .finalCta .finalInner p {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .finalCta .finalInner h2 {
+    width: min(100%, 22rem);
+    max-width: 22rem;
+    font-size: clamp(1.85rem, 8.5vw, 2.45rem);
+    line-height: 1.08;
+    letter-spacing: -0.018rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .finalCta .finalInner p {
+    width: min(100%, 20rem);
+    max-width: 20rem;
+    margin-top: 1rem;
+    font-size: clamp(0.95rem, 3.75vw, 1.05rem);
+    line-height: 1.25;
+    white-space: normal;
   }
 }
