@@ -2698,8 +2698,25 @@
   top: clamp(4.25rem, 8vw, 7rem);
   right: clamp(1.5rem, 8.75vw, 7.875rem);
   width: clamp(4.25rem, 8.1vw, 7rem);
-  height: clamp(4.25rem, 8.1vw, 7rem);
+  height: auto;
+  aspect-ratio: var(--decor-aspect);
   object-fit: contain;
+}
+
+.todayOrnament {
+  --decor-aspect: 139 / 145;
+}
+
+.planningCloud {
+  --decor-aspect: 139 / 63;
+}
+
+.clockKnot {
+  --decor-aspect: 139 / 201;
+}
+
+.laFlower {
+  --decor-aspect: 129 / 101;
 }
 
 .finalCta {
@@ -4591,7 +4608,8 @@
     top: clamp(5.25rem, 16vw, 7.25rem);
     right: 0.75rem;
     width: clamp(3.75rem, 12vw, 5.25rem);
-    height: clamp(3.75rem, 12vw, 5.25rem);
+    height: auto;
+    aspect-ratio: var(--decor-aspect);
     object-fit: contain;
     opacity: 0.62;
   }

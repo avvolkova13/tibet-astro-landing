@@ -1,5 +1,7 @@
 import {
+  lazy,
   memo,
+  Suspense,
   useCallback,
   useEffect,
   useRef,
@@ -17,17 +19,41 @@ import {
   useTransform,
 } from 'framer-motion';
 import { FireSymbol } from './components/FireSymbol';
-import TodayScreenAnimation from './components/TodayScreenAnimation';
-import CalendarScreenAnimation from './components/CalendarScreenAnimation';
-import HoursScreenAnimation from './components/HoursScreenAnimation';
-import LaEnergyScreenAnimation from './components/LaEnergyScreenAnimation/LaEnergyScreenAnimation';
 import styles from './App.module.css?final-cta-fidelity-19';
 
 const FALLBACK_DURATION = 5;
+const MOBILE_MEDIA_QUERY = '(max-width: 767px)';
+
+const TodayScreenAnimation = lazy(() => import('./components/TodayScreenAnimation'));
+const CalendarScreenAnimation = lazy(() => import('./components/CalendarScreenAnimation'));
+const HoursScreenAnimation = lazy(() => import('./components/HoursScreenAnimation'));
+const LaEnergyScreenAnimation = lazy(
+  () => import('./components/LaEnergyScreenAnimation/LaEnergyScreenAnimation'),
+);
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 
 const easeOut = (value: number) => 1 - Math.pow(1 - clamp01(value), 3);
+
+const getInitialMobileViewport = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia(MOBILE_MEDIA_QUERY).matches;
+
+function useMobileViewport() {
+  const [isMobileViewport, setIsMobileViewport] = useState(getInitialMobileViewport);
+
+  useEffect(() => {
+    const media = window.matchMedia(MOBILE_MEDIA_QUERY);
+    const update = () => setIsMobileViewport(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return isMobileViewport;
+}
 
 const assets = {
   logo: '/assets/logo.svg',
@@ -414,11 +440,12 @@ function HeroScrubSection() {
   const lastUiUpdateRef = useRef(0);
   const scrollMetricsRef = useRef({ top: 0, distance: 1 });
   const reduceMotion = useReducedMotion();
+  const isMobileViewport = useMobileViewport();
   const [progress, setProgress] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
-    if (reduceMotion) {
+    if (reduceMotion || isMobileViewport) {
       return;
     }
 
@@ -517,7 +544,7 @@ function HeroScrubSection() {
       window.removeEventListener('scroll', readScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [reduceMotion]);
+  }, [isMobileViewport, reduceMotion]);
 
   const scrollToSecondFrame = useCallback(() => {
     const wrapper = wrapperRef.current;
@@ -533,7 +560,7 @@ function HeroScrubSection() {
     });
   }, [reduceMotion]);
 
-  if (reduceMotion) {
+  if (reduceMotion || isMobileViewport) {
     return (
       <div className={styles.heroScrubReduced}>
         <MemoHeroScene className={styles.heroScrubHero} />
@@ -771,10 +798,13 @@ function getOuterRevealProps(inView: boolean, delay = 0) {
 
 function LivingPlanningDemo({ inView }: { inView: boolean }) {
   const reduceMotion = useReducedMotion();
+  const phoneStageRef = useRef<HTMLDivElement>(null);
+  const phoneInView = useInView(phoneStageRef, { once: true, amount: 0.45 });
 
   return (
     <div className={styles.dualPhones}>
       <motion.div
+        ref={phoneStageRef}
         className={styles.calendarPhoneStage}
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}
         animate={
@@ -784,12 +814,16 @@ function LivingPlanningDemo({ inView }: { inView: boolean }) {
         }
         transition={{ duration: 0.82, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
       >
-        <CalendarScreenAnimation
-          key={inView ? 'calendar-play' : 'calendar-idle'}
-          autoPlay={inView}
-          className={styles.calendarPhone}
-          scale={0.7}
-        />
+        {phoneInView ? (
+          <Suspense fallback={null}>
+            <CalendarScreenAnimation
+              key="calendar-play"
+              autoPlay
+              className={styles.calendarPhone}
+              scale={0.7}
+            />
+          </Suspense>
+        ) : null}
       </motion.div>
     </div>
   );
@@ -797,10 +831,13 @@ function LivingPlanningDemo({ inView }: { inView: boolean }) {
 
 function ClockSpacerDemo({ inView }: { inView: boolean }) {
   const reduceMotion = useReducedMotion();
+  const phoneStageRef = useRef<HTMLDivElement>(null);
+  const phoneInView = useInView(phoneStageRef, { once: true, amount: 0.45 });
 
   return (
     <div className={`${styles.dualPhones} ${styles.clockSpacerPhones}`}>
       <motion.div
+        ref={phoneStageRef}
         className={styles.clockPhoneStage}
         initial={reduceMotion ? false : { opacity: 0, y: 18 }}
         animate={
@@ -814,12 +851,16 @@ function ClockSpacerDemo({ inView }: { inView: boolean }) {
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-        <HoursScreenAnimation
-          key={inView ? 'hours-play' : 'hours-idle'}
-          autoPlay={inView}
-          className={styles.clockPhone}
-          scale={0.7}
-        />
+        {phoneInView ? (
+          <Suspense fallback={null}>
+            <HoursScreenAnimation
+              key="hours-play"
+              autoPlay
+              className={styles.clockPhone}
+              scale={0.7}
+            />
+          </Suspense>
+        ) : null}
       </motion.div>
     </div>
   );
@@ -901,12 +942,16 @@ function App() {
             {...getOuterRevealProps(todaySectionInView, 0.12)}
           >
             <div className={styles.todayPhoneReveal}>
-              <TodayScreenAnimation
-                key={todayPhoneInView ? 'today-play' : 'today-idle'}
-                autoPlay={todayPhoneInView}
-                className={styles.todayPhone}
-                scale={0.7}
-              />
+              {todayPhoneInView ? (
+                <Suspense fallback={null}>
+                  <TodayScreenAnimation
+                    key="today-play"
+                    autoPlay
+                    className={styles.todayPhone}
+                    scale={0.7}
+                  />
+                </Suspense>
+              ) : null}
             </div>
           </motion.div>
           <TodayCopy className={styles.todayStandaloneCopy} inView={todaySectionInView} />
@@ -999,12 +1044,16 @@ function App() {
             className={styles.laPhoneReveal}
             {...getOuterRevealProps(laSectionInView, 0.12)}
           >
-            <LaEnergyScreenAnimation
-              key={laPhoneInView ? 'la-play' : 'la-idle'}
-              autoPlay={laPhoneInView}
-              className={styles.laPhone}
-              scale={0.7}
-            />
+            {laPhoneInView ? (
+              <Suspense fallback={null}>
+                <LaEnergyScreenAnimation
+                  key="la-play"
+                  autoPlay
+                  className={styles.laPhone}
+                  scale={0.7}
+                />
+              </Suspense>
+            ) : null}
           </motion.div>
         </div>
       </StackedSection>
