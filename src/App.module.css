@@ -4654,8 +4654,15 @@
   }
 
   .finalCta {
-    min-height: max(100svh, 52rem);
+    min-height: 100svh;
     height: auto;
+    padding: clamp(2.25rem, 7svh, 3.5rem) max(1rem, env(safe-area-inset-right)) clamp(1.5rem, 5svh, 2.5rem) max(1rem, env(safe-area-inset-left));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(7.5rem, 18svh) auto minmax(12rem, 25svh) auto;
+    gap: clamp(0.85rem, 2.4svh, 1.25rem);
+    align-content: center;
+    justify-items: center;
     background:
       radial-gradient(circle at 50% 33%, rgba(130, 15, 10, 0.82), rgba(42, 12, 12, 0.98) 58%, #120305 100%),
       url('/assets/final-cta/background.png') center center / cover no-repeat,
@@ -4664,7 +4671,7 @@
 
   .finalCta::before,
   .finalCta::after {
-    position: absolute;
+    position: relative;
     z-index: 1;
     display: block;
     pointer-events: none;
@@ -4674,22 +4681,20 @@
   }
 
   .finalCta::before {
-    top: -4.25rem;
-    left: -18.5rem;
-    width: 48rem;
-    height: 35rem;
+    grid-row: 1;
+    width: min(100%, 28rem);
+    height: 100%;
     background-image: url('/assets/final-cta/hands-rotated.png');
-    transform: rotate(-9deg);
+    background-position: center bottom;
     opacity: 0.94;
   }
 
   .finalCta::after {
-    right: -18.5rem;
-    bottom: 4.25rem;
-    width: 46rem;
-    height: 34rem;
+    grid-row: 3;
+    width: min(100%, 28rem);
+    height: 100%;
     background-image: url('/assets/final-cta/hands-front.png');
-    background-position: right bottom;
+    background-position: center center;
     opacity: 0.96;
   }
 
@@ -4698,11 +4703,15 @@
   }
 
   .finalCta .finalInner {
-    inset: clamp(4.75rem, 14vw, 6.25rem) max(1rem, env(safe-area-inset-right)) auto max(1rem, env(safe-area-inset-left));
+    position: relative;
+    inset: auto;
+    grid-row: 2;
     z-index: 3;
-    width: auto;
+    width: min(100%, calc(100vw - 2rem));
+    margin: 0;
     display: grid;
     justify-items: center;
+    gap: clamp(0.8rem, 2svh, 1rem);
     text-align: center;
   }
 
@@ -4715,7 +4724,7 @@
   .finalCta .finalInner h2 {
     width: min(100%, 22rem);
     max-width: 22rem;
-    font-size: clamp(1.85rem, 8.5vw, 2.45rem);
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
     line-height: 1.08;
     letter-spacing: -0.018rem;
     white-space: normal;
@@ -4725,14 +4734,30 @@
   .finalCta .finalInner p {
     width: min(100%, 20rem);
     max-width: 20rem;
-    margin-top: 1rem;
+    margin-top: 0;
     font-size: clamp(0.95rem, 3.75vw, 1.05rem);
     line-height: 1.25;
     white-space: normal;
   }
 
   .finalCta .heroStoreRow {
+    position: relative;
+    inset: auto;
+    grid-row: 4;
     z-index: 4;
-    bottom: 2.25rem;
+    width: min(16.5rem, calc(100vw - 2rem));
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .finalCta .heroStoreButton {
+    height: 2.25rem;
+  }
+
+  .finalCta .googlePlayLockup,
+  .finalCta .appStoreLockup {
+    transform: scale(0.56);
   }
 }
