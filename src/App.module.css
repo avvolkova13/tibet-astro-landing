@@ -4656,10 +4656,50 @@
   .finalCta {
     min-height: max(100svh, 52rem);
     height: auto;
+    background:
+      radial-gradient(circle at 50% 33%, rgba(130, 15, 10, 0.82), rgba(42, 12, 12, 0.98) 58%, #120305 100%),
+      url('/assets/final-cta/background.png') center center / cover no-repeat,
+      #2a0c0c;
+  }
+
+  .finalCta::before,
+  .finalCta::after {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    pointer-events: none;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .finalCta::before {
+    top: -4.25rem;
+    left: -18.5rem;
+    width: 48rem;
+    height: 35rem;
+    background-image: url('/assets/final-cta/hands-rotated.png');
+    transform: rotate(-9deg);
+    opacity: 0.94;
+  }
+
+  .finalCta::after {
+    right: -18.5rem;
+    bottom: 4.25rem;
+    width: 46rem;
+    height: 34rem;
+    background-image: url('/assets/final-cta/hands-front.png');
+    background-position: right bottom;
+    opacity: 0.96;
+  }
+
+  .finalCtaFrame {
+    display: none;
   }
 
   .finalCta .finalInner {
     inset: clamp(4.75rem, 14vw, 6.25rem) max(1rem, env(safe-area-inset-right)) auto max(1rem, env(safe-area-inset-left));
+    z-index: 3;
     width: auto;
     display: grid;
     justify-items: center;
@@ -4689,5 +4729,10 @@
     font-size: clamp(0.95rem, 3.75vw, 1.05rem);
     line-height: 1.25;
     white-space: normal;
+  }
+
+  .finalCta .heroStoreRow {
+    z-index: 4;
+    bottom: 2.25rem;
   }
 }
