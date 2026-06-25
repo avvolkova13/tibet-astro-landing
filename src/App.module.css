@@ -4479,8 +4479,10 @@
   .planningSection,
   .clockSection,
   .laSection {
+    --mockup-section-scroll-height: max(128svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(36rem, 62vw, 48rem)));
+    top: calc(100svh - var(--mockup-section-scroll-height));
     height: auto;
-    min-height: max(100svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(24rem, 48vw, 28rem)));
+    min-height: var(--mockup-section-scroll-height);
     padding: clamp(4.5rem, 12vw, 6rem) max(1rem, env(safe-area-inset-left)) clamp(4.75rem, 13vw, 6.5rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -4636,7 +4638,8 @@
   .planningSection,
   .clockSection,
   .laSection {
-    min-height: max(100svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(21rem, 64vw, 25rem)));
+    --mockup-section-scroll-height: max(135svh, calc((var(--landing-phone-width) * 658 / 300) + clamp(32rem, 94vw, 42rem)));
+    min-height: var(--mockup-section-scroll-height);
     padding-top: clamp(3.75rem, 11vw, 4.75rem);
     padding-bottom: clamp(4.25rem, 12vw, 5.75rem);
     gap: clamp(1.5rem, 5vw, 2.35rem);
