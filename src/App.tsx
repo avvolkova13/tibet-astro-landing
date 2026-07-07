@@ -295,7 +295,7 @@ function HeroScene({
       >
         и следите за жизненной энергией
         <br />
-        ЛА в одном приложении.
+        ЛА в одном приложении
       </motion.p>
 
       <button
@@ -352,15 +352,13 @@ function TodayCopy({ className = '', inView }: { className?: string; inView: boo
     <div className={`${styles.sectionCopy} ${className}`}>
       <div>
         <motion.span className={styles.kicker} {...getOuterRevealProps(inView, 0.18)}>
-          Всё самое важное о дне
+          Каждый день раскрывает себя по-новому
         </motion.span>
         <motion.h2 {...getOuterRevealProps(inView, 0.08)}>Что сегодня за день?</motion.h2>
       </div>
       <motion.div {...getOuterRevealProps(inView, 0.24)}>
         <p>
-          Откройте приложение и за несколько секунд получите полную
-          характеристику сегодняшнего дня — от рекомендаций и особых событий до
-          влияния на разные годы рождения.
+          Приложение подскажет, что важно знать именно сегодня
         </p>
       </motion.div>
     </div>
@@ -420,8 +418,8 @@ const HeroStoryContent = memo(function HeroStoryContent() {
             },
           }}
         >
-          Тибетский календарь помогает увидеть особенности каждого дня заранее
-          и выбрать подходящее время для важных дел, решений и перемен.
+          Тибетский календарь заранее раскрывает особенности каждого дня,
+          помогая выбрать удачное время для важных решений
         </motion.p>
       </div>
     </motion.div>
@@ -1035,7 +1033,7 @@ function App() {
           <motion.span {...getOuterRevealProps(clockSectionInView, 0.18)}>Когда действовать?</motion.span>
           <motion.p {...getOuterRevealProps(clockSectionInView, 0.24)}>
             Узнайте, какое время дня считается наиболее благоприятным для ваших
-            планов.
+            планов
           </motion.p>
         </div>
         <ClockSpacerDemo inView={clockSectionInView} />
@@ -1058,16 +1056,15 @@ function App() {
         />
         <div className={styles.laCopy}>
           <motion.h2 {...getOuterRevealProps(laSectionInView, 0.08)}>
-            Больше,
+            ЧТО ТАКОЕ
             <br />
-            чем календарь
+            ЭНЕРГИЯ ЛА?
           </motion.h2>
-          <motion.span {...getOuterRevealProps(laSectionInView, 0.18)}>Познакомьтесь с энергией</motion.span>
+          <motion.span {...getOuterRevealProps(laSectionInView, 0.18)}>Знание, которое веками хранил Тибет</motion.span>
           <motion.div className={styles.laDescription} {...getOuterRevealProps(laSectionInView, 0.24)}>
-            <p>Одна из ключевых традиций тибетского календаря</p>
             <p>
-              Каждый день приложение показывает движение энергии ЛА
-              <br />в традициях Калачакры и Бушми.
+              Приложение показывает движение энергии ЛА согласно традициям
+              Калачакры и Бушми
             </p>
           </motion.div>
         </div>
@@ -1093,16 +1090,42 @@ function App() {
 
       <StackedSection className={styles.finalCta} layer={6}>
         <img
+          src={assets.finalCtaBackground}
+          alt=""
+          className={styles.finalCtaBackground}
+          aria-hidden="true"
+        />
+        <img
+          src={assets.finalCtaHandsRotated}
+          alt=""
+          className={styles.finalCtaHandsRotated}
+          aria-hidden="true"
+        />
+        <img
+          src={assets.finalCtaHandsFront}
+          alt=""
+          className={styles.finalCtaHandsFront}
+          aria-hidden="true"
+        />
+        <img
           src={assets.finalCtaFrame}
           alt=""
           className={styles.finalCtaFrame}
           aria-hidden="true"
         />
+        <img
+          src={assets.heroLogo}
+          alt="Tibet Astro"
+          className={styles.finalCtaLogo}
+        />
         <Reveal className={styles.finalInner}>
-          <h2>Ваш личный тибетский календарь всегда под рукой</h2>
+          <h2>
+            Мудрость Тибета не требует поиска,
+            <br />
+            она уже здесь
+          </h2>
           <p>
-            Вся информация о дне, важных периодах и будущих датах — в одном
-            месте.
+            Рядом каждый день, стоит лишь заглянуть
           </p>
         </Reveal>
         <motion.div
