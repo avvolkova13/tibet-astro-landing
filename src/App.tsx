@@ -56,28 +56,28 @@ function useMobileViewport() {
 }
 
 const assets = {
-  logo: '/assets/logo.svg',
-  heroLogo: '/assets/hero-logo.svg',
-  heroGirl: '/assets/hero-girl-transparent.png',
-  heroArrow: '/assets/hero-arrow-figma.svg',
-  googlePlayMark: '/assets/google-play-mark-figma.svg',
-  googlePlayWordmark: '/assets/google-play-wordmark-figma.svg',
-  appleMark: '/assets/apple-mark-figma.svg',
-  appStoreWordmark: '/assets/app-store-wordmark-figma.svg',
-  finalCtaBackground: '/assets/final-cta/background.png',
-  finalCtaHandsRotated: '/assets/final-cta/hands-rotated.png',
-  finalCtaHandsFront: '/assets/final-cta/hands-front.png',
-  finalCtaFrame: '/assets/final-cta/figma-frame.png',
-  todayOrnament: '/today-ornament.svg',
-  todaySparkles: '/today-sparkles.svg',
-  planningCloud: '/planning-cloud.svg',
-  planningKnot: '/planning-knot.svg',
-  laFlower: '/la-flower.svg',
-  todayFigmaMockup: '/phone-frame-figma.png',
-  today: '/assets/02_Block_Today.png',
-  calendar: '/assets/03_Block_Calendar.png',
-  clock: '/assets/03_Block_Clock.png',
-  la: '/assets/04_Block_LA.png',
+  logo: `${import.meta.env.BASE_URL}assets/logo.svg`,
+  heroLogo: `${import.meta.env.BASE_URL}assets/hero-logo.svg`,
+  heroGirl: `${import.meta.env.BASE_URL}assets/hero-girl-transparent.png`,
+  heroArrow: `${import.meta.env.BASE_URL}assets/hero-arrow-figma.svg`,
+  googlePlayMark: `${import.meta.env.BASE_URL}assets/google-play-mark-figma.svg`,
+  googlePlayWordmark: `${import.meta.env.BASE_URL}assets/google-play-wordmark-figma.svg`,
+  appleMark: `${import.meta.env.BASE_URL}assets/apple-mark-figma.svg`,
+  appStoreWordmark: `${import.meta.env.BASE_URL}assets/app-store-wordmark-figma.svg`,
+  finalCtaBackground: `${import.meta.env.BASE_URL}assets/final-cta/background.png`,
+  finalCtaHandsRotated: `${import.meta.env.BASE_URL}assets/final-cta/hands-rotated.png`,
+  finalCtaHandsFront: `${import.meta.env.BASE_URL}assets/final-cta/hands-front.png`,
+  finalCtaFrame: `${import.meta.env.BASE_URL}assets/final-cta/figma-frame.png`,
+  todayOrnament: `${import.meta.env.BASE_URL}today-ornament.svg`,
+  todaySparkles: `${import.meta.env.BASE_URL}today-sparkles.svg`,
+  planningCloud: `${import.meta.env.BASE_URL}planning-cloud.svg`,
+  planningKnot: `${import.meta.env.BASE_URL}planning-knot.svg`,
+  laFlower: `${import.meta.env.BASE_URL}la-flower.svg`,
+  todayFigmaMockup: `${import.meta.env.BASE_URL}phone-frame-figma.png`,
+  today: `${import.meta.env.BASE_URL}assets/02_Block_Today.png`,
+  calendar: `${import.meta.env.BASE_URL}assets/03_Block_Calendar.png`,
+  clock: `${import.meta.env.BASE_URL}assets/03_Block_Clock.png`,
+  la: `${import.meta.env.BASE_URL}assets/04_Block_LA.png`,
 };
 
 type ScreenKind = 'today' | 'calendar' | 'clock' | 'la';
@@ -597,7 +597,7 @@ function HeroScrubSection() {
     );
   }
 
-  const videoSrc = !isMobileViewport || mobileVideoEnabled ? '/hero-scrub.mp4' : undefined;
+  const videoSrc = !isMobileViewport || mobileVideoEnabled ? `${import.meta.env.BASE_URL}hero-scrub.mp4` : undefined;
   const showScrubVideo = Boolean(videoSrc) && (!isMobileViewport || videoMetadataReady);
 
   const blockOneOpacity =
@@ -617,7 +617,7 @@ function HeroScrubSection() {
       <div className={styles.heroScrubSticky}>
         <img
           className={styles.heroScrubPoster}
-          src="/hero-poster.jpg"
+          src={`${import.meta.env.BASE_URL}hero-poster.jpg`}
           alt=""
           aria-hidden="true"
         />
@@ -625,7 +625,7 @@ function HeroScrubSection() {
             ref={videoRef}
             className={styles.heroScrubVideo}
             src={videoSrc}
-            poster="/hero-poster.jpg"
+            poster={`${import.meta.env.BASE_URL}hero-poster.jpg`}
             muted
             playsInline
             preload={isMobileViewport ? 'metadata' : 'auto'}

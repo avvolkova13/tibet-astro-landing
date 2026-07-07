@@ -2,7 +2,7 @@ import { memo, useRef } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import styles from './LivingLAScreen.module.css';
 
-const laImage = '/assets/04_Block_LA.png';
+const laImage = `${import.meta.env.BASE_URL}assets/04_Block_LA.png`;
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function LASlice({

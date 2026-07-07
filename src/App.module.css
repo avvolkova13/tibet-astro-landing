@@ -240,7 +240,7 @@
 .transparentPhoneMockup::after {
   inset: 0;
   z-index: 6;
-  background: url('/phone-frame-figma.png') center / 100% 100% no-repeat;
+  background: url('../phone-frame-figma.png') center / 100% 100% no-repeat;
 }
 
 .phoneAtmosphere {
@@ -2234,7 +2234,7 @@
   position: relative;
   background:
     linear-gradient(rgba(18, 4, 8, 0.1), rgba(18, 4, 8, 0.38)),
-    url('/hero-poster.jpg') center top / cover no-repeat,
+    url('../hero-poster.jpg') center top / cover no-repeat,
     #120408;
 }
 
@@ -3732,8 +3732,8 @@
     radial-gradient(ellipse at 35% 20%, rgba(255, 247, 235, 0.22), transparent 42%),
     radial-gradient(ellipse at 70% 90%, rgba(168, 55, 42, 0.18), transparent 48%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(82, 19, 20, 0.12));
-  -webkit-mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
-  mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
+  -webkit-mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
+  mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
   filter:
     drop-shadow(0 8px 20px rgba(0, 0, 0, 0.14))
     drop-shadow(0 0 10px rgba(224, 148, 103, 0.08));
@@ -3744,8 +3744,8 @@
   position: absolute;
   inset: 0;
   content: '';
-  -webkit-mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
-  mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
+  -webkit-mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
+  mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
 }
 
 .heroArrowGlass::before {
@@ -3781,8 +3781,8 @@
       rgba(255, 246, 232, 0.06) 58%,
       transparent 72%
     );
-  -webkit-mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
-  mask: url('/assets/hero-arrow-figma.svg') center / contain no-repeat;
+  -webkit-mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
+  mask: url('./hero-arrow-figma.svg') center / contain no-repeat;
   opacity: 0;
   transform: translateX(-38%);
   animation: heroArrowShine 5.8s ease-in-out infinite;
@@ -4666,7 +4666,7 @@
     display: block;
     border-radius: 0;
     background:
-      url('/assets/final-cta/background.png') calc(50% + 134.6vw) calc(var(--cta-mobile-offset-y) - 7.95vw) / 371.28vw 278.46vw no-repeat,
+      url('./final-cta/background.png') calc(50% + 134.6vw) calc(var(--cta-mobile-offset-y) - 7.95vw) / 371.28vw 278.46vw no-repeat,
       #2a0c0c;
   }
 
@@ -4686,7 +4686,7 @@
     left: -38.46vw;
     width: 211.03vw;
     height: 153.59vw;
-    background-image: url('/assets/final-cta/hands-front.png');
+    background-image: url('./final-cta/hands-front.png');
   }
 
   .finalCta::after {
@@ -4694,7 +4694,7 @@
     left: -102.05vw;
     width: 210.89vw;
     height: 153.51vw;
-    background-image: url('/assets/final-cta/hands-rotated.png');
+    background-image: url('./final-cta/hands-rotated.png');
     clip-path: inset(9% 0 0 0);
     transform: rotate(-9deg);
     transform-origin: center center;

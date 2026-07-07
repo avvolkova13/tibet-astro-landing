@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import styles from './PlanningScreens.module.css';
 
-const calendarImage = '/assets/03_Block_Calendar.png';
-const clockImage = '/assets/03_Block_Clock.png';
+const calendarImage = `${import.meta.env.BASE_URL}assets/03_Block_Calendar.png`;
+const clockImage = `${import.meta.env.BASE_URL}assets/03_Block_Clock.png`;
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function ScreenSlice({
