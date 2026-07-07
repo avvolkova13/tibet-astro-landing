@@ -283,9 +283,6 @@ function HeroScene({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.62 }}
       >
-        Узнавайте особенности дня,
-        <br />
-        находите благоприятные даты
       </motion.p>
       <motion.p
         className={`${styles.heroCopy} ${styles.heroCopyRight}`}
@@ -293,6 +290,10 @@ function HeroScene({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.7 }}
       >
+        Узнавайте особенности дня,
+        <br />
+        находите благоприятные даты
+        <br />
         и следите за жизненной энергией
         <br />
         ЛА в одном приложении

@@ -3669,7 +3669,7 @@
 
 .heroTitle {
   position: absolute;
-  top: 53.2%;
+  top: 49.6%;
   z-index: 4;
   margin: 0;
   color: #f3e8dd;
@@ -3687,14 +3687,15 @@
 }
 
 .heroTitleRight {
-  right: max(3.45vw, 2rem);
+  top: 59.45%;
+  left: max(3.45vw, 2rem);
 }
 
 .heroCopy {
   position: absolute;
-  top: 66.2%;
+  top: 52.35%;
   z-index: 4;
-  width: 28.5rem;
+  width: min(31.8rem, 28vw);
   margin: 0;
   color: #f3e8dd;
   font-size: clamp(1.1rem, 1.67vw, 1.5rem);
@@ -3704,7 +3705,7 @@
 }
 
 .heroCopyLeft {
-  left: max(3.45vw, 2rem);
+  display: none;
 }
 
 .heroCopyRight {
@@ -4719,6 +4720,15 @@
   .finalCtaHandsRotated,
   .finalCtaHandsFront {
     display: none;
+  }
+
+  .finalCtaLogo {
+    top: calc(var(--cta-mobile-offset-y) + 188vw);
+    right: auto;
+    left: 50%;
+    width: clamp(58px, 14.87vw, 68px);
+    height: auto;
+    transform: translateX(-50%);
   }
 
   .finalCta .finalInner {
