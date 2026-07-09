@@ -266,7 +266,7 @@ function HeroScene({
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
       >
-        Тибетский
+        Тибетский календарь
       </motion.h1>
       <motion.h1
         className={`${styles.heroTitle} ${styles.heroTitleRight}`}
@@ -274,7 +274,7 @@ function HeroScene({
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.42, ease: [0.22, 1, 0.36, 1] }}
       >
-        календарь
+        на каждый день
       </motion.h1>
 
       <motion.p
@@ -290,13 +290,13 @@ function HeroScene({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.7 }}
       >
-        Узнавайте особенности дня,
+        Начните жить в ритме дней,
         <br />
-        находите благоприятные даты
+        а не вопреки им.
         <br />
-        и следите за жизненной энергией
+        Tibet Astro покажет,
         <br />
-        ЛА в одном приложении
+        каким будет ваш день
       </motion.p>
 
       <button
@@ -359,7 +359,12 @@ function TodayCopy({ className = '', inView }: { className?: string; inView: boo
       </div>
       <motion.div {...getOuterRevealProps(inView, 0.24)}>
         <p>
-          Приложение подскажет, что важно знать именно сегодня
+          Один взгляд утром, и вы уже знаете о дне главное: стоит ли
+          действовать или лучше повременить, какой идёт лунный день и кто им
+          правит, какие цвета принесут удачу, здоровье и достаток. Приложение
+          подскажет, подходящий ли сегодня день для стрижки или дороги, и
+          предупредит, если день особый, когда каждый поступок отзывается
+          многократно
         </p>
       </motion.div>
     </div>
@@ -419,8 +424,8 @@ const HeroStoryContent = memo(function HeroStoryContent() {
             },
           }}
         >
-          Тибетский календарь заранее раскрывает особенности каждого дня,
-          помогая выбрать удачное время для важных решений
+          Дело не в удаче. У каждого дня своя природа, и Tibet Astro раскроет
+          её заранее, чтобы вы выбирали самые благоприятные дни для важных дел
         </motion.p>
       </div>
     </motion.div>
@@ -1008,7 +1013,9 @@ function App() {
           <motion.h2 {...getOuterRevealProps(planningSectionInView, 0.08)}>Ваш календарь</motion.h2>
           <motion.span {...getOuterRevealProps(planningSectionInView, 0.18)}>Будьте на шаг впереди</motion.span>
           <motion.p {...getOuterRevealProps(planningSectionInView, 0.24)}>
-            Следите за благоприятными датами и планируйте важные дела заранее
+            Планируйте не наугад, а с ясной картиной месяца. Удачные дни и
+            праздники традиций Бон и буддизма уже отмечены, остаётся выбрать
+            дело и увидеть лучшие даты для него
           </motion.p>
         </div>
         <LivingPlanningDemo inView={planningSectionInView} />
@@ -1033,8 +1040,9 @@ function App() {
           <motion.h2 {...getOuterRevealProps(clockSectionInView, 0.08)}>Находите удачные часы</motion.h2>
           <motion.span {...getOuterRevealProps(clockSectionInView, 0.18)}>Когда действовать?</motion.span>
           <motion.p {...getOuterRevealProps(clockSectionInView, 0.24)}>
-            Узнайте, какое время дня считается наиболее благоприятным для ваших
-            планов
+            Важен не только день, но и час. Приложение покажет благоприятные и
+            неблагоприятные периоды с точностью до минуты, чтобы вы начинали
+            важное в верный момент
           </motion.p>
         </div>
         <ClockSpacerDemo inView={clockSectionInView} />
@@ -1064,8 +1072,10 @@ function App() {
           <motion.span {...getOuterRevealProps(laSectionInView, 0.18)}>Знание, которое веками хранил Тибет</motion.span>
           <motion.div className={styles.laDescription} {...getOuterRevealProps(laSectionInView, 0.24)}>
             <p>
-              Приложение показывает движение энергии ЛА согласно традициям
-              Калачакры и Бушми
+              Жизненная энергия ЛА каждый день перемещается по телу.
+              Приложение показывает, где она находится сегодня, согласно
+              традициям Калачакры и Бушми, чтобы вы бережно относились к себе
+              так, как учили тибетские мастера
             </p>
           </motion.div>
         </div>
@@ -1121,10 +1131,11 @@ function App() {
         />
         <Reveal className={styles.finalInner}>
           <h2>
-            Мудрость Тибета не требует поиска,
+            Мудрость Тибета не требует поиска.
             <br />
-            она уже здесь
+            Она уже здесь
           </h2>
+          <p>Начните с сегодняшнего дня</p>
         </Reveal>
         <motion.div
           className={styles.heroStoreRow}
