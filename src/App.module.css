@@ -1277,6 +1277,7 @@
 }
 
 .todayStandaloneSection {
+  --mockup-section-side-content-top: 64%;
   height: 57.0139vw;
   min-height: 0;
   padding: 0;
@@ -1305,7 +1306,7 @@
 
 .todaySparkles {
   left: 3.54%;
-  top: calc(50% + 205px);
+  top: var(--mockup-section-side-content-top);
   bottom: auto;
   width: 1.46%;
   height: 2.56%;
@@ -1326,8 +1327,8 @@
 
 .todayStandaloneCopy > div:last-child {
   position: absolute;
-  top: auto;
-  bottom: calc(50% - 329px);
+  top: var(--mockup-section-side-content-top);
+  bottom: auto;
   right: 4.35%;
   width: 22.02%;
 }
@@ -1335,8 +1336,8 @@
 .todayStandaloneCopy .kicker {
   position: absolute;
   left: 3.54%;
-  top: auto;
-  bottom: calc(50% - 329px);
+  top: calc(var(--mockup-section-side-content-top) + 77px);
+  bottom: auto;
   margin: 0;
 }
 
@@ -2362,6 +2363,7 @@
   --stack-rim: rgba(227, 177, 117, 0.34);
   --stack-shadow: rgba(8, 1, 2, 0.62);
   --mockup-section-bottom-content: calc(93.54% - 659px);
+  --mockup-section-side-content-top: 64%;
   height: 57.0139vw;
   min-height: 0;
   padding: 0;
@@ -2416,7 +2418,8 @@
 .clockCopy span {
   position: absolute;
   left: 3.47%;
-  bottom: var(--mockup-section-bottom-content);
+  top: calc(var(--mockup-section-side-content-top) + 77px);
+  bottom: auto;
   color: var(--gold);
   font-family: inherit;
   font-size: 1rem;
@@ -2428,7 +2431,8 @@
 .planningCopy p,
 .clockCopy p {
   position: absolute;
-  bottom: var(--mockup-section-bottom-content);
+  top: var(--mockup-section-side-content-top);
+  bottom: auto;
   right: 3.47%;
   width: 20.2%;
   margin: 0;
@@ -2441,7 +2445,7 @@
 
 .planningSection .planningCopy span,
 .planningSection .planningCopy p {
-  bottom: calc(var(--mockup-section-bottom-content) - 28px);
+  bottom: auto;
 }
 
 .clockCopy {
@@ -2463,7 +2467,7 @@
 
 .planningSparkles {
   left: 3.47%;
-  top: calc(81.73% - 63px);
+  top: var(--mockup-section-side-content-top);
   width: 1.67%;
   height: 2.92%;
   object-fit: contain;
@@ -2479,7 +2483,7 @@
 
 .clockSparkles {
   left: 3.47%;
-  top: calc(81.73% - 41px);
+  top: var(--mockup-section-side-content-top);
   width: 1.67%;
   height: 2.92%;
   object-fit: contain;
@@ -2592,6 +2596,7 @@
   --stack-rim: rgba(227, 177, 117, 0.34);
   --stack-shadow: rgba(8, 1, 2, 0.62);
   --mockup-section-bottom-content: calc(93.54% - 659px);
+  --mockup-section-side-content-top: 64%;
   height: 57.0139vw;
   min-height: 0;
   padding: 0;
@@ -2649,7 +2654,8 @@
 .laCopy span {
   position: absolute;
   left: 3.47%;
-  bottom: var(--mockup-section-bottom-content);
+  top: calc(var(--mockup-section-side-content-top) + 77px);
+  bottom: auto;
   color: var(--gold);
   font-family: inherit;
   font-size: 1rem;
@@ -2661,7 +2667,8 @@
 .laDescription {
   position: absolute;
   right: 3.47%;
-  bottom: var(--mockup-section-bottom-content);
+  top: var(--mockup-section-side-content-top);
+  bottom: auto;
   width: 20.2%;
   color: #f3e8dd;
   font-size: clamp(1rem, 1.18vw, 1.06rem);
@@ -2692,7 +2699,7 @@
 
 .laSparkles {
   left: 3.47%;
-  top: calc(81.73% - 72px);
+  top: var(--mockup-section-side-content-top);
   width: 1.67%;
   height: 2.92%;
 }
@@ -3674,7 +3681,7 @@
   margin: 0;
   color: #f3e8dd;
   font-family: 'Literata', Georgia, serif;
-  font-size: clamp(4.5rem, 5.55vw, 5rem);
+  font-size: clamp(3.9rem, 4.85vw, 4.35rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.025rem;
@@ -4065,20 +4072,22 @@
   }
 
   .heroScrubHero .heroTitle {
-    top: 49%;
-    max-width: 35vw;
-    font-size: clamp(2.55rem, 5.3vw, 3.75rem);
+    max-width: 44vw;
+    font-size: clamp(2.45rem, 4.9vw, 3.35rem);
     line-height: 1.06;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .heroScrubHero .heroTitleLeft {
+    top: 49%;
     left: clamp(1.25rem, 3vw, 2rem);
   }
 
   .heroScrubHero .heroTitleRight {
-    right: clamp(1.25rem, 3vw, 2rem);
-    text-align: right;
+    top: 55.8%;
+    right: auto;
+    left: clamp(1.25rem, 3vw, 2rem);
+    text-align: left;
   }
 
   .heroScrubHero .heroCopy {
@@ -4126,22 +4135,23 @@
   }
 
   .heroScrubHero .heroTitle {
-    right: 1rem;
     left: 1rem;
-    max-width: none;
-    font-size: clamp(2.25rem, 8.5vw, 3.4rem);
+    max-width: 58vw;
+    font-size: clamp(1.85rem, 7.5vw, 2.7rem);
     line-height: 1;
-    text-align: center;
-    white-space: normal;
+    text-align: left;
+    white-space: nowrap;
     text-shadow: 0 2px 20px rgba(30, 3, 5, 0.72);
   }
 
   .heroScrubHero .heroTitleLeft {
-    top: 48%;
+    top: 47.5%;
   }
 
   .heroScrubHero .heroTitleRight {
-    top: 55%;
+    top: 53.7%;
+    right: auto;
+    left: 1rem;
   }
 
   .heroScrubHero .heroCopy {
@@ -4196,15 +4206,16 @@
   }
 
   .heroScrubHero .heroTitle {
-    font-size: clamp(2rem, 10.4vw, 2.8rem);
+    max-width: 64vw;
+    font-size: clamp(1.75rem, 8.6vw, 2.35rem);
   }
 
   .heroScrubHero .heroTitleLeft {
-    top: 47%;
+    top: 47.8%;
   }
 
   .heroScrubHero .heroTitleRight {
-    top: 53%;
+    top: 53.3%;
   }
 
   .heroScrubHero .heroCopy {

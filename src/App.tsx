@@ -1125,9 +1125,6 @@ function App() {
             <br />
             она уже здесь
           </h2>
-          <p>
-            Рядом каждый день, стоит лишь заглянуть
-          </p>
         </Reveal>
         <motion.div
           className={styles.heroStoreRow}
