@@ -4135,11 +4135,13 @@
   }
 
   .heroScrubHero .heroTitle {
-    left: 1rem;
-    max-width: 58vw;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
     font-size: clamp(1.85rem, 7.5vw, 2.7rem);
     line-height: 1;
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
     text-shadow: 0 2px 20px rgba(30, 3, 5, 0.72);
   }
@@ -4150,8 +4152,8 @@
 
   .heroScrubHero .heroTitleRight {
     top: 53.7%;
-    right: auto;
-    left: 1rem;
+    right: 0;
+    left: 0;
   }
 
   .heroScrubHero .heroCopy {
@@ -4206,7 +4208,7 @@
   }
 
   .heroScrubHero .heroTitle {
-    max-width: 64vw;
+    max-width: none;
     font-size: clamp(1.75rem, 8.6vw, 2.35rem);
   }
 
