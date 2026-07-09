@@ -3681,7 +3681,7 @@
   margin: 0;
   color: #f3e8dd;
   font-family: 'Literata', Georgia, serif;
-  font-size: clamp(3.9rem, 4.85vw, 4.35rem);
+  font-size: clamp(1.75rem, 2.35vw, 2.15rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.025rem;
@@ -3691,11 +3691,13 @@
 
 .heroTitleLeft {
   left: max(3.45vw, 2rem);
+  max-width: 42vw;
 }
 
 .heroTitleRight {
   top: 59.45%;
   left: max(3.45vw, 2rem);
+  max-width: 42vw;
 }
 
 .heroCopy {
@@ -4072,8 +4074,8 @@
   }
 
   .heroScrubHero .heroTitle {
-    max-width: 44vw;
-    font-size: clamp(2.45rem, 4.9vw, 3.35rem);
+    max-width: 38vw;
+    font-size: clamp(1.45rem, 2.9vw, 1.9rem);
     line-height: 1.06;
     white-space: nowrap;
   }
@@ -4395,7 +4397,7 @@
 
 .finalCta .finalInner {
   position: absolute;
-  top: 38.2%;
+  top: 35.6%;
   right: 0;
   left: 0;
   z-index: 3;
@@ -4415,6 +4417,10 @@
 
 .finalCta .finalInner h2 {
   max-width: 82rem;
+}
+
+.finalCta .finalInner p {
+  margin-top: clamp(0.55rem, 0.7vw, 0.75rem);
 }
 
 .finalCta .heroStoreRow {
