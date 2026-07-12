@@ -2816,20 +2816,8 @@
   .planningSparkles,
   .clockSparkles,
   .laSparkles {
-    top: calc(14.8% + clamp(16rem, 17vw, 18rem));
+    top: calc(14.8% + clamp(25rem, 27vw, 28rem));
     left: clamp(5.5rem, 5.8vw, 7rem);
-  }
-
-  .todaySparkles {
-    top: calc(14.8% + clamp(25rem, 27vw, 28rem));
-  }
-
-  .clockSparkles {
-    top: calc(14.8% + clamp(22rem, 23vw, 24.5rem));
-  }
-
-  .laSparkles {
-    top: calc(14.8% + clamp(25rem, 27vw, 28rem));
   }
 }
 
@@ -4632,27 +4620,11 @@
   }
 
   .todaySparkles,
-  .planningSparkles {
-    top: calc(14.8% + clamp(18rem, 21vw, 21.5rem));
-    left: clamp(4.5rem, 5.8vw, 6.25rem);
-  }
-
+  .planningSparkles,
   .clockSparkles,
   .laSparkles {
-    top: calc(14.8% + clamp(21rem, 25vw, 25.5rem));
+    top: calc(14.8% + clamp(27rem, 31vw, 31rem));
     left: clamp(4.5rem, 5.8vw, 6.25rem);
-  }
-
-  .todaySparkles {
-    top: calc(14.8% + clamp(27rem, 31vw, 31rem));
-  }
-
-  .clockSparkles {
-    top: calc(14.8% + clamp(24rem, 28vw, 28rem));
-  }
-
-  .laSparkles {
-    top: calc(14.8% + clamp(27rem, 31vw, 31rem));
   }
 }
 
