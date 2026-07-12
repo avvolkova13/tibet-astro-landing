@@ -2827,6 +2827,10 @@
   .clockSparkles {
     top: calc(14.8% + clamp(22rem, 23vw, 24.5rem));
   }
+
+  .laSparkles {
+    top: calc(14.8% + clamp(25rem, 27vw, 28rem));
+  }
 }
 
 .todayOrnament,
@@ -4645,6 +4649,10 @@
 
   .clockSparkles {
     top: calc(14.8% + clamp(24rem, 28vw, 28rem));
+  }
+
+  .laSparkles {
+    top: calc(14.8% + clamp(27rem, 31vw, 31rem));
   }
 }
 
