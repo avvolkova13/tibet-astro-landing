@@ -69,7 +69,6 @@ const assets = {
   finalCtaHandsFront: `${import.meta.env.BASE_URL}assets/final-cta/hands-front.png`,
   finalCtaFrame: `${import.meta.env.BASE_URL}assets/final-cta/figma-frame.png`,
   todayOrnament: `${import.meta.env.BASE_URL}today-ornament.svg`,
-  todaySparkles: `${import.meta.env.BASE_URL}today-sparkles.svg`,
   planningCloud: `${import.meta.env.BASE_URL}planning-cloud.svg`,
   planningKnot: `${import.meta.env.BASE_URL}planning-knot.svg`,
   laFlower: `${import.meta.env.BASE_URL}la-flower.svg`,
@@ -439,14 +438,6 @@ function PhoneTitle({
     <motion.h2 className={styles.phoneTitle} {...getOuterRevealProps(inView, 0.08)}>
       <span className={styles.phoneTitleLine}>
         <span>{firstLine}</span>
-        <motion.img
-          src={assets.todaySparkles}
-          alt=""
-          aria-hidden="true"
-          className={styles.titleSparkle}
-          data-active={inView ? 'true' : 'false'}
-          {...getOuterRevealProps(inView, 0.2)}
-        />
       </span>
       <span className={styles.phoneTitleLine}>
         {beforeObject ? (
@@ -493,11 +484,10 @@ function TodayCopy({ className = '', inView }: { className?: string; inView: boo
         Каждый день раскрывает себя по-новому
       </motion.span>
       <DescriptionReveal inView={inView}>
-        Один взгляд утром, и вы уже знаете о дне главное: стоит ли действовать
-        или лучше повременить, какой идёт лунный день и кто им правит, какие
-        цвета принесут удачу, здоровье и достаток. Приложение подскажет,
-        подходящий ли сегодня день для стрижки или дороги, и предупредит, если
-        день особый, когда каждый поступок отзывается многократно
+        Один взгляд утром, и вы знаете о дне главное: стоит ли действовать,
+        какие часы будут удачными, какие цвета принесут успех. Приложение
+        подскажет, подходит ли день для стрижки или дороги, и предупредит об
+        особых днях, когда каждый поступок отзывается многократно
       </DescriptionReveal>
     </div>
   );
@@ -1123,9 +1113,9 @@ function App() {
           />
           <motion.span {...getOuterRevealProps(planningSectionInView, 1.28)}>Будьте на шаг впереди</motion.span>
           <DescriptionReveal inView={planningSectionInView}>
-            Планируйте не наугад, а с ясной картиной месяца. Удачные дни и
-            праздники традиций Бон и буддизма уже отмечены, остаётся выбрать
-            дело и увидеть лучшие даты для него
+            Планируйте не наугад, а с ясной картиной месяца: удачные дни и
+            праздники традиций Бон и буддизма уже отмечены в календаре. Выберите
+            дело, и приложение покажет лучшие даты именно для него
           </DescriptionReveal>
         </div>
         <LivingPlanningDemo inView={planningSectionInView} />
@@ -1143,9 +1133,9 @@ function App() {
           />
           <motion.span {...getOuterRevealProps(clockSectionInView, 1.28)}>Когда действовать?</motion.span>
           <DescriptionReveal inView={clockSectionInView}>
-            Важен не только день, но и час. Приложение покажет благоприятные и
-            неблагоприятные периоды с точностью до минуты, чтобы вы начинали
-            важное в верный момент
+            Важен не только день, но и час. Приложение показывает благоприятные
+            и неблагоприятные периоды с точностью до минуты, чтобы вы начинали
+            важные дела в верный момент
           </DescriptionReveal>
         </div>
         <ClockSpacerDemo inView={clockSectionInView} />
@@ -1163,10 +1153,10 @@ function App() {
           />
           <motion.span {...getOuterRevealProps(laSectionInView, 1.28)}>Знание, которое веками хранил Тибет</motion.span>
           <DescriptionReveal className={styles.laDescription} inView={laSectionInView}>
-            Жизненная энергия ЛА каждый день перемещается по телу. Приложение
-            показывает, где она находится сегодня, согласно традициям Калачакры
-            и Бушми, чтобы вы бережно относились к себе так, как учили тибетские
-            мастера
+            Жизненная энергия Ла каждый день перемещается по телу. Опираясь на
+            традиции Калачакры и Бушми, приложение показывает, где она находится
+            сегодня, чтобы вы относились к этому месту с вниманием, как учили
+            тибетские мастера
           </DescriptionReveal>
         </div>
         <div className={styles.laVisual}>

@@ -5159,8 +5159,7 @@
   display: inline-block !important;
 }
 
-.titleInlineObject,
-.titleSparkle {
+.titleInlineObject {
   display: block;
   flex: 0 0 auto;
   pointer-events: none;
@@ -5202,14 +5201,6 @@
   width: 1.28em;
 }
 
-.titleSparkle {
-  width: 0.34em;
-  height: 0.34em;
-  margin: -0.18em 0 0 0.02em;
-  align-self: flex-start;
-  filter: drop-shadow(0 0 0.16em rgba(238, 213, 171, 0.28));
-}
-
 .clockCopy .titleInlineObject {
   width: 0.62em;
   height: auto;
@@ -5242,10 +5233,6 @@
 
 .titleInlineObject[data-active='true'] {
   animation: title-object-glow-flicker 4.8s 0.92s ease-in-out infinite;
-}
-
-.titleSparkle[data-active='true'] {
-  animation: title-sparkle-glimmer 3.4s 0.78s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 @keyframes title-object-breathe {
@@ -5360,10 +5347,6 @@
     width: 0.8em;
   }
 
-  .titleSparkle {
-    width: 0.32em;
-    height: 0.32em;
-  }
 }
 
 @media (min-width: 981px) {
@@ -5430,8 +5413,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .titleInlineObject[data-active='true'],
-  .titleSparkle[data-active='true'] {
+  .titleInlineObject[data-active='true'] {
     animation: none;
   }
 }

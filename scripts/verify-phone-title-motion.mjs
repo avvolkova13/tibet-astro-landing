@@ -24,13 +24,12 @@ if (phoneTitleUses !== 4) {
 if (
   !source.includes('styles.titleInlineObject') ||
   !source.includes('styles.titleObjectSlot') ||
-  !source.includes('styles.titleSparkle') ||
   !source.includes('styles.titleMovingWord') ||
   !source.includes("'--title-object-width': objectWidth") ||
   !source.includes("'--title-slot-width': slotWidth") ||
   !source.includes("data-active={inView ? 'true' : 'false'}")
 ) {
-  throw new Error('Title object or sparkle styling hook is missing');
+  throw new Error('Title object styling hook is missing');
 }
 
 if (
