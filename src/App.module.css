@@ -5652,4 +5652,55 @@
   .laSection {
     --phone-description-frame-width: 100%;
   }
+
+  .todayStandaloneCopy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .todayStandaloneCopy > div:first-child {
+    order: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+
+  .todayStandaloneCopy .phoneTitle {
+    order: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .todayStandaloneCopy .kicker {
+    order: 2 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 32px 0 0 !important;
+  }
+
+  .todayStandaloneCopy > div:last-child,
+  .todayStandaloneCopy .descriptionReveal {
+    order: 3 !important;
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 16px 0 0 !important;
+  }
+
+  .todayStandaloneCopy .descriptionReveal p {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
 }
