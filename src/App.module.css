@@ -3832,6 +3832,20 @@
   text-align: right;
 }
 
+.heroCopyReveal p {
+  width: 100%;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+}
+
+.heroCopyReveal .descriptionRevealWord {
+  font-weight: inherit;
+}
+
 .heroArrow {
   position: absolute;
   top: calc(53.2% + 3.15rem);

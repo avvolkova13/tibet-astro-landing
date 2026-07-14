@@ -284,20 +284,15 @@ function HeroScene({
         transition={{ duration: 0.7, delay: 0.62 }}
       >
       </motion.p>
-      <motion.p
-        className={`${styles.heroCopy} ${styles.heroCopyRight}`}
-        initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.7 }}
+      <DescriptionReveal
+        inView
+        className={`${styles.heroCopy} ${styles.heroCopyRight} ${styles.heroCopyReveal}`}
+        delay={0.7}
+        lightDelay={1.08}
       >
-        Начните жить в ритме дней,
-        <br />
-        а не вопреки им.
-        <br />
-        Tibet Astro покажет,
-        <br />
-        каким будет ваш день
-      </motion.p>
+        {`Начните жить в ритме дней, а не вопреки им.
+Tibet Astro покажет, каким будет ваш день`}
+      </DescriptionReveal>
 
       <button
         className={styles.heroArrow}
@@ -361,7 +356,10 @@ function getDescriptionText(node: ReactNode): string {
 }
 
 function renderDescriptionLightText(children: ReactNode) {
-  const text = getDescriptionText(children).replace(/\s+/g, ' ').trim();
+  const text = getDescriptionText(children)
+    .replace(/[^\S\n]+/g, ' ')
+    .replace(/ *\n */g, '\n')
+    .trim();
 
   if (!text) {
     return children;
@@ -369,7 +367,11 @@ function renderDescriptionLightText(children: ReactNode) {
 
   let wordIndex = 0;
 
-  return text.split(/(\s+)/).map((token, index) => {
+  return text.split(/(\n|\s+)/).map((token, index) => {
+    if (token === '\n') {
+      return <br key={`line-${index}`} />;
+    }
+
     if (/^\s+$/.test(token)) {
       return (
         <span key={`space-${index}`} className={styles.descriptionRevealSpace}>
