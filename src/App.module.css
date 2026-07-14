@@ -3842,8 +3842,23 @@
   text-align: inherit;
 }
 
+.heroCopyReveal p br {
+  display: block;
+}
+
 .heroCopyReveal .descriptionRevealWord {
   font-weight: inherit;
+}
+
+@media (min-width: 769px) {
+  .heroScrubHero .heroCopyReveal {
+    width: max-content !important;
+    max-width: none !important;
+  }
+
+  .heroScrubHero .heroCopyReveal p {
+    white-space: nowrap;
+  }
 }
 
 .heroArrow {
