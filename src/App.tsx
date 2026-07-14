@@ -348,25 +348,155 @@ function HeroScene({
 
 const MemoHeroScene = memo(HeroScene);
 
+function getDescriptionText(node: ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(getDescriptionText).join('');
+  }
+
+  return '';
+}
+
+function renderDescriptionLightText(children: ReactNode) {
+  const text = getDescriptionText(children).replace(/\s+/g, ' ').trim();
+
+  if (!text) {
+    return children;
+  }
+
+  let wordIndex = 0;
+
+  return text.split(/(\s+)/).map((token, index) => {
+    if (/^\s+$/.test(token)) {
+      return (
+        <span key={`space-${index}`} className={styles.descriptionRevealSpace}>
+          {' '}
+        </span>
+      );
+    }
+
+    const style = { '--word-index': wordIndex } as CSSProperties;
+    wordIndex += 1;
+
+    return (
+      <span key={`word-${index}`} className={styles.descriptionRevealWord} style={style}>
+        {token}
+      </span>
+    );
+  });
+}
+
+function DescriptionReveal({
+  inView,
+  children,
+  className = '',
+  delay = 1.58,
+  lightDelay = 2.08,
+}: {
+  inView: boolean;
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  lightDelay?: number;
+}) {
+  return (
+    <motion.div
+      className={`${styles.descriptionReveal} ${className}`}
+      style={{ '--description-light-delay': `${lightDelay}s` } as CSSProperties}
+      initial={{ opacity: 0, y: 12 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+      transition={{ duration: 0.72, delay, ease: outerRevealEase }}
+      data-revealed={inView ? 'true' : 'false'}
+    >
+      <p>{renderDescriptionLightText(children)}</p>
+    </motion.div>
+  );
+}
+
+function PhoneTitle({
+  inView,
+  firstLine,
+  beforeObject = '',
+  afterObject,
+  objectSrc,
+  objectWidth,
+}: {
+  inView: boolean;
+  firstLine: string;
+  beforeObject?: string;
+  afterObject: string;
+  objectSrc: string;
+  objectWidth: string;
+}) {
+  const slotWidth = `calc((${objectWidth} * var(--adaptive-title-object-scale, 1)) + 32px)`;
+
+  return (
+    <motion.h2 className={styles.phoneTitle} {...getOuterRevealProps(inView, 0.08)}>
+      <span className={styles.phoneTitleLine}>
+        <span>{firstLine}</span>
+        <motion.img
+          src={assets.todaySparkles}
+          alt=""
+          aria-hidden="true"
+          className={styles.titleSparkle}
+          data-active={inView ? 'true' : 'false'}
+          {...getOuterRevealProps(inView, 0.2)}
+        />
+      </span>
+      <span className={styles.phoneTitleLine}>
+        {beforeObject ? (
+          <span className={styles.titleMovingWord}>{beforeObject}</span>
+        ) : null}
+        <motion.span
+          className={styles.titleObjectSlot}
+          style={
+            {
+              '--title-object-width': objectWidth,
+              '--title-slot-width': slotWidth,
+            } as CSSProperties
+          }
+          initial={{ width: 0, opacity: 0 }}
+          animate={inView ? { width: slotWidth, opacity: 1 } : { width: 0, opacity: 0 }}
+          transition={{ duration: 0.86, delay: 0.82, ease: outerRevealEase }}
+          aria-hidden="true"
+        >
+          <img
+            src={objectSrc}
+            alt=""
+            className={styles.titleInlineObject}
+            data-active={inView ? 'true' : 'false'}
+          />
+        </motion.span>
+        <span className={styles.titleMovingWord}>{afterObject}</span>
+      </span>
+    </motion.h2>
+  );
+}
+
 function TodayCopy({ className = '', inView }: { className?: string; inView: boolean }) {
   return (
     <div className={`${styles.sectionCopy} ${className}`}>
-      <div>
-        <motion.span className={styles.kicker} {...getOuterRevealProps(inView, 0.18)}>
-          Каждый день раскрывает себя по-новому
-        </motion.span>
-        <motion.h2 {...getOuterRevealProps(inView, 0.08)}>Что сегодня за день?</motion.h2>
-      </div>
-      <motion.div {...getOuterRevealProps(inView, 0.24)}>
-        <p>
-          Один взгляд утром, и вы уже знаете о дне главное: стоит ли
-          действовать или лучше повременить, какой идёт лунный день и кто им
-          правит, какие цвета принесут удачу, здоровье и достаток. Приложение
-          подскажет, подходящий ли сегодня день для стрижки или дороги, и
-          предупредит, если день особый, когда каждый поступок отзывается
-          многократно
-        </p>
-      </motion.div>
+      <PhoneTitle
+        inView={inView}
+        firstLine="Что сегодня"
+        beforeObject="за"
+        afterObject="день?"
+        objectSrc={assets.todayOrnament}
+        objectWidth="0.94em"
+      />
+      <motion.span className={styles.kicker} {...getOuterRevealProps(inView, 1.28)}>
+        Каждый день раскрывает себя по-новому
+      </motion.span>
+      <DescriptionReveal inView={inView}>
+        Один взгляд утром, и вы уже знаете о дне главное: стоит ли действовать
+        или лучше повременить, какой идёт лунный день и кто им правит, какие
+        цвета принесут удачу, здоровье и достаток. Приложение подскажет,
+        подходящий ли сегодня день для стрижки или дороги, и предупредит, если
+        день особый, когда каждый поступок отзывается многократно
+      </DescriptionReveal>
     </div>
   );
 }
@@ -959,20 +1089,6 @@ function App() {
         layer={2}
         sectionRef={todaySectionRef}
       >
-          <motion.img
-            src={assets.todaySparkles}
-            alt=""
-            className={styles.todaySparkles}
-            aria-hidden="true"
-            {...getOuterRevealProps(todaySectionInView, 0)}
-          />
-          <motion.img
-            src={assets.todayOrnament}
-            alt=""
-            className={styles.todayOrnament}
-            aria-hidden="true"
-            {...getOuterRevealProps(todaySectionInView, 0.06)}
-          />
           <motion.div
             ref={todayPhoneRef}
             className={styles.todayStage}
@@ -995,89 +1111,61 @@ function App() {
       </StackedSection>
 
       <StackedSection className={styles.planningSection} layer={3} sectionRef={planningSectionRef}>
-        <motion.img
-          src={assets.todaySparkles}
-          alt=""
-          className={styles.planningSparkles}
-          aria-hidden="true"
-          {...getOuterRevealProps(planningSectionInView, 0)}
-        />
-        <motion.img
-          src={assets.planningCloud}
-          alt=""
-          className={styles.planningCloud}
-          aria-hidden="true"
-          {...getOuterRevealProps(planningSectionInView, 0.06)}
-        />
         <div className={styles.planningCopy}>
-          <motion.h2 {...getOuterRevealProps(planningSectionInView, 0.08)}>Ваш календарь</motion.h2>
-          <motion.span {...getOuterRevealProps(planningSectionInView, 0.18)}>Будьте на шаг впереди</motion.span>
-          <motion.p {...getOuterRevealProps(planningSectionInView, 0.24)}>
+          <PhoneTitle
+            inView={planningSectionInView}
+            firstLine="Ваш"
+            afterObject="календарь"
+            objectSrc={assets.planningCloud}
+            objectWidth="1.28em"
+          />
+          <motion.span {...getOuterRevealProps(planningSectionInView, 1.28)}>Будьте на шаг впереди</motion.span>
+          <DescriptionReveal inView={planningSectionInView}>
             Планируйте не наугад, а с ясной картиной месяца. Удачные дни и
             праздники традиций Бон и буддизма уже отмечены, остаётся выбрать
             дело и увидеть лучшие даты для него
-          </motion.p>
+          </DescriptionReveal>
         </div>
         <LivingPlanningDemo inView={planningSectionInView} />
       </StackedSection>
 
       <StackedSection className={styles.clockSection} layer={4} sectionRef={clockSectionRef}>
-        <motion.img
-          src={assets.todaySparkles}
-          alt=""
-          className={styles.clockSparkles}
-          aria-hidden="true"
-          {...getOuterRevealProps(clockSectionInView, 0)}
-        />
-        <motion.img
-          src={assets.planningKnot}
-          alt=""
-          className={styles.clockKnot}
-          aria-hidden="true"
-          {...getOuterRevealProps(clockSectionInView, 0.06)}
-        />
         <div className={styles.clockCopy}>
-          <motion.h2 {...getOuterRevealProps(clockSectionInView, 0.08)}>Находите удачные часы</motion.h2>
-          <motion.span {...getOuterRevealProps(clockSectionInView, 0.18)}>Когда действовать?</motion.span>
-          <motion.p {...getOuterRevealProps(clockSectionInView, 0.24)}>
+          <PhoneTitle
+            inView={clockSectionInView}
+            firstLine="Находите"
+            beforeObject="удачные"
+            afterObject="часы"
+            objectSrc={assets.planningKnot}
+            objectWidth="0.62em"
+          />
+          <motion.span {...getOuterRevealProps(clockSectionInView, 1.28)}>Когда действовать?</motion.span>
+          <DescriptionReveal inView={clockSectionInView}>
             Важен не только день, но и час. Приложение покажет благоприятные и
             неблагоприятные периоды с точностью до минуты, чтобы вы начинали
             важное в верный момент
-          </motion.p>
+          </DescriptionReveal>
         </div>
         <ClockSpacerDemo inView={clockSectionInView} />
       </StackedSection>
 
       <StackedSection className={styles.laSection} layer={5} sectionRef={laSectionRef}>
-        <motion.img
-          src={assets.todaySparkles}
-          alt=""
-          className={styles.laSparkles}
-          aria-hidden="true"
-          {...getOuterRevealProps(laSectionInView, 0)}
-        />
-        <motion.img
-          src={assets.laFlower}
-          alt=""
-          className={styles.laFlower}
-          aria-hidden="true"
-          {...getOuterRevealProps(laSectionInView, 0.06)}
-        />
         <div className={styles.laCopy}>
-          <motion.h2 {...getOuterRevealProps(laSectionInView, 0.08)}>
-            ЧТО ТАКОЕ
-            <br />
-            ЭНЕРГИЯ ЛА?
-          </motion.h2>
-          <motion.span {...getOuterRevealProps(laSectionInView, 0.18)}>Знание, которое веками хранил Тибет</motion.span>
-          <motion.div className={styles.laDescription} {...getOuterRevealProps(laSectionInView, 0.24)}>
-            <p>
-              Жизненная энергия ЛА каждый день перемещается по телу.
-              Приложение показывает, где она находится сегодня, согласно
-              традициям Калачакры и Бушми, чтобы вы бережно относились к себе
-              так, как учили тибетские мастера
-            </p>
-          </motion.div>
+          <PhoneTitle
+            inView={laSectionInView}
+            firstLine="Что такое"
+            beforeObject="энергия"
+            afterObject="ЛА?"
+            objectSrc={assets.laFlower}
+            objectWidth="0.84em"
+          />
+          <motion.span {...getOuterRevealProps(laSectionInView, 1.28)}>Знание, которое веками хранил Тибет</motion.span>
+          <DescriptionReveal className={styles.laDescription} inView={laSectionInView}>
+            Жизненная энергия ЛА каждый день перемещается по телу. Приложение
+            показывает, где она находится сегодня, согласно традициям Калачакры
+            и Бушми, чтобы вы бережно относились к себе так, как учили тибетские
+            мастера
+          </DescriptionReveal>
         </div>
         <div className={styles.laVisual}>
           <motion.div

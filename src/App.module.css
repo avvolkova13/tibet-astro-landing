@@ -4993,3 +4993,663 @@
     transform: scale(0.78);
   }
 }
+
+/* Shared reading reveal for the four phone-section descriptions. */
+.descriptionReveal {
+  margin: 0;
+  --description-light-delay: 2.08s;
+}
+
+.descriptionReveal p {
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #8e5a48 0%,
+    #8e5a48 28%,
+    #d7a966 46%,
+    #f3e8dd 58%,
+    #f3e8dd 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.descriptionReveal[data-revealed='true'] p {
+  animation: description-reading-reveal 1.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes description-reading-reveal {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (min-width: 981px) {
+  .planningCopy .descriptionReveal,
+  .clockCopy .descriptionReveal,
+  .laCopy .descriptionReveal {
+    position: absolute;
+    top: calc(11.79% + 13.4rem);
+    right: auto;
+    left: 3.54%;
+    width: 22.02%;
+  }
+
+  .todayStandaloneCopy h2,
+  .planningCopy h2,
+  .clockCopy h2,
+  .laCopy h2 {
+    width: min(31vw, 31rem);
+    font-size: clamp(3.7rem, 4.7vw, 5.25rem);
+    line-height: 0.98;
+  }
+
+  .todayStandaloneCopy .kicker,
+  .planningCopy span,
+  .clockCopy span,
+  .laCopy span {
+    font-size: clamp(1.25rem, 1.45vw, 1.5rem);
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 980px) {
+  .todayStandaloneCopy .descriptionReveal,
+  .planningCopy .descriptionReveal,
+  .clockCopy .descriptionReveal,
+  .laCopy .descriptionReveal {
+    position: static;
+    width: auto;
+    margin: 0;
+  }
+
+  .descriptionReveal p {
+    font-size: clamp(1rem, 4.3vw, 1.25rem);
+    line-height: 1.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .descriptionReveal[data-revealed='true'] p {
+    animation: none;
+    background-position: 0 0;
+  }
+}
+
+/* Decorative title composition for the four phone sections. */
+.phoneTitle {
+  --title-spread-scale: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.02em;
+}
+
+.phoneTitle .phoneTitleLine {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  display: inline-flex;
+  width: max-content !important;
+  max-width: 100%;
+  align-items: center;
+  gap: 0;
+  margin: 0 !important;
+  color: inherit !important;
+  font: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  white-space: nowrap;
+}
+
+.phoneTitle .phoneTitleLine span {
+  position: static !important;
+  display: inline !important;
+  width: auto !important;
+  margin: 0 !important;
+  color: inherit !important;
+  font: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+.phoneTitle .phoneTitleLine .titleMovingWord {
+  display: inline-block !important;
+}
+
+.titleInlineObject,
+.titleSparkle {
+  display: block;
+  flex: 0 0 auto;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+}
+
+.titleObjectSlot {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.11em;
+  box-sizing: border-box;
+  padding-inline: 16px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.titleObjectSlot .titleInlineObject {
+  width: calc(var(--title-object-width) * var(--adaptive-title-object-scale, 1)) !important;
+  height: auto !important;
+  max-width: none;
+  margin: 0;
+  aspect-ratio: auto;
+}
+
+.titleInlineObject {
+  width: 0.94em;
+  height: auto;
+  aspect-ratio: auto;
+  margin: 0 0.02em;
+  filter:
+    drop-shadow(0 0 0.16em rgba(246, 174, 104, 0.42))
+    drop-shadow(0 0 0.34em rgba(189, 64, 38, 0.26));
+}
+
+.planningCopy .titleInlineObject {
+  width: 1.28em;
+}
+
+.titleSparkle {
+  width: 0.34em;
+  height: 0.34em;
+  margin: -0.18em 0 0 0.02em;
+  align-self: flex-start;
+  filter: drop-shadow(0 0 0.16em rgba(238, 213, 171, 0.28));
+}
+
+.clockCopy .titleInlineObject {
+  width: 0.62em;
+  height: auto;
+}
+
+.laCopy .titleInlineObject {
+  width: 0.84em;
+  height: auto;
+}
+
+.laCopy .laDescription p {
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #8e5a48 0%,
+    #8e5a48 28%,
+    #d7a966 46%,
+    #f3e8dd 58%,
+    #f3e8dd 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.titleInlineObject[data-active='true'] {
+  animation: title-object-glow-flicker 4.8s 0.92s ease-in-out infinite;
+}
+
+.titleSparkle[data-active='true'] {
+  animation: title-sparkle-glimmer 3.4s 0.78s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes title-object-breathe {
+  0%,
+  100% {
+    translate: 0 0;
+    filter: drop-shadow(0 0 0.14em rgba(222, 131, 82, 0.24));
+  }
+
+  50% {
+    translate: 0 -0.08em;
+    filter: drop-shadow(0 0 0.24em rgba(246, 174, 104, 0.45));
+  }
+}
+
+@keyframes title-object-glow-flicker {
+  0%,
+  100% {
+    opacity: 0.92;
+    scale: 1;
+    filter:
+      drop-shadow(0 0 0.14em rgba(238, 213, 171, 0.42))
+      drop-shadow(0 0 0.3em rgba(246, 174, 104, 0.36))
+      drop-shadow(0 0 0.58em rgba(181, 69, 42, 0.24));
+  }
+
+  22% {
+    opacity: 1;
+    scale: 1.018;
+    filter:
+      drop-shadow(0 0 0.24em rgba(255, 225, 175, 0.72))
+      drop-shadow(0 0 0.54em rgba(255, 181, 95, 0.56))
+      drop-shadow(0 0 1.02em rgba(223, 91, 52, 0.44));
+  }
+
+  36% {
+    opacity: 0.84;
+    scale: 0.992;
+    filter:
+      drop-shadow(0 0 0.12em rgba(215, 169, 102, 0.34))
+      drop-shadow(0 0 0.28em rgba(246, 174, 104, 0.25))
+      drop-shadow(0 0 0.48em rgba(169, 55, 35, 0.2));
+  }
+
+  58% {
+    opacity: 1;
+    scale: 1.012;
+    filter:
+      drop-shadow(0 0 0.22em rgba(255, 216, 158, 0.66))
+      drop-shadow(0 0 0.5em rgba(246, 174, 104, 0.5))
+      drop-shadow(0 0 0.94em rgba(255, 78, 45, 0.4));
+  }
+
+  74% {
+    opacity: 0.94;
+    scale: 1;
+    filter:
+      drop-shadow(0 0 0.16em rgba(238, 213, 171, 0.44))
+      drop-shadow(0 0 0.34em rgba(246, 174, 104, 0.32))
+      drop-shadow(0 0 0.64em rgba(185, 75, 42, 0.26));
+  }
+}
+
+@keyframes title-sparkle-glimmer {
+  0%,
+  72%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    opacity: 0.82;
+  }
+
+  78% {
+    translate: -0.04em 0.05em;
+    scale: 0.46;
+    opacity: 0.22;
+  }
+
+  86% {
+    translate: 0 -0.14em;
+    scale: 1.24;
+    opacity: 1;
+  }
+
+  93% {
+    translate: 0 -0.04em;
+    scale: 0.94;
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 980px) {
+  .phoneTitle {
+    --title-spread-scale: 0.74;
+    gap: 0.06em;
+  }
+
+  .titleInlineObject {
+    width: 0.9em;
+    height: auto;
+  }
+
+  .planningCopy .titleInlineObject {
+    width: 1.18em;
+  }
+
+  .clockCopy .titleInlineObject {
+    width: 0.62em;
+  }
+
+  .laCopy .titleInlineObject {
+    width: 0.8em;
+  }
+
+  .titleSparkle {
+    width: 0.32em;
+    height: 0.32em;
+  }
+}
+
+@media (min-width: 981px) {
+  .todayStandaloneSection,
+  .planningSection,
+  .clockSection,
+  .laSection {
+    --phone-copy-column-width: clamp(28rem, 31vw, 35rem);
+  }
+
+  .todayStandaloneCopy > div:last-child,
+  .planningCopy .descriptionReveal,
+  .clockCopy .descriptionReveal,
+  .laCopy .descriptionReveal {
+    width: var(--phone-copy-column-width);
+  }
+
+  .planningCopy .phoneTitle,
+  .clockCopy .phoneTitle,
+  .laCopy .phoneTitle {
+    top: 11.79%;
+    left: 3.54%;
+    width: var(--phone-copy-column-width);
+    max-width: var(--phone-copy-column-width);
+    font-size: clamp(4.2rem, 5.1vw, 4.55rem);
+    line-height: 1.035;
+  }
+
+  .laCopy .phoneTitle {
+    width: var(--phone-copy-column-width);
+    max-width: var(--phone-copy-column-width);
+  }
+
+  .todayStandaloneCopy .kicker,
+  .planningCopy > span,
+  .clockCopy > span,
+  .laCopy > span {
+    position: absolute;
+    top: calc(11.79% + 10.1rem);
+    left: 3.54%;
+    right: auto;
+    bottom: auto;
+    width: var(--phone-copy-column-width);
+    margin: 0;
+    color: var(--gold);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: clamp(1.25rem, 1.45vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .planningCopy .descriptionReveal p,
+  .clockCopy .descriptionReveal p,
+  .laCopy .descriptionReveal p {
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titleInlineObject[data-active='true'],
+  .titleSparkle[data-active='true'] {
+    animation: none;
+  }
+}
+
+/* One vertical copy rhythm for every desktop phone section. */
+@media (min-width: 981px) {
+  .todayStandaloneCopy,
+  .planningCopy,
+  .clockCopy,
+  .laCopy {
+    position: absolute;
+    top: 11.79%;
+    right: auto;
+    bottom: auto;
+    left: 3.54%;
+    z-index: 4;
+    width: var(--phone-copy-column-width);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    pointer-events: none;
+    text-align: left;
+  }
+
+  .todayStandaloneCopy .phoneTitle,
+  .planningCopy .phoneTitle,
+  .clockCopy .phoneTitle,
+  .laCopy .phoneTitle {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: var(--phone-copy-column-width);
+    max-width: var(--phone-copy-column-width);
+    margin: 0;
+  }
+
+  .todayStandaloneCopy .kicker,
+  .planningCopy > span,
+  .clockCopy > span,
+  .laCopy > span {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: var(--phone-copy-column-width);
+    margin: 32px 0 0 !important;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .todayStandaloneCopy .descriptionReveal,
+  .planningCopy .descriptionReveal,
+  .clockCopy .descriptionReveal,
+  .laCopy .descriptionReveal {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: var(--phone-copy-column-width);
+    margin: 16px 0 0 !important;
+  }
+
+  .todayStandaloneCopy .descriptionReveal p,
+  .planningCopy .descriptionReveal p,
+  .clockCopy .descriptionReveal p,
+  .laCopy .descriptionReveal p {
+    position: static !important;
+    width: auto !important;
+    margin: 0;
+    text-align: left;
+  }
+}
+
+/* Self-running red-gold light typing for the four phone-section descriptions. */
+.descriptionReveal p,
+.laCopy .laDescription p {
+  --description-final-color: rgba(222, 151, 104, 0.96);
+  color: rgba(124, 67, 55, 0.48);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  font-weight: 500;
+}
+
+.descriptionRevealSpace {
+  white-space: pre-wrap;
+}
+
+.descriptionRevealWord {
+  display: inline-block;
+  color: rgba(142, 82, 62, 0.62);
+  opacity: 0.48;
+  font-weight: 500;
+  transform: translateY(0.12em);
+  text-shadow: none;
+  will-change: color, opacity, transform, text-shadow;
+}
+
+.descriptionReveal[data-revealed='true'] p {
+  animation: none;
+  background-position: 0 0;
+}
+
+.descriptionReveal[data-revealed='true'] .descriptionRevealWord {
+  animation: description-light-type 1.18s
+    calc(var(--description-light-delay) + (0.026s * var(--word-index)))
+    cubic-bezier(0.2, 0.82, 0.18, 1)
+    both;
+}
+
+@keyframes description-light-type {
+  0% {
+    color: rgba(105, 55, 49, 0.42);
+    opacity: 0.34;
+    transform: translateY(0.12em);
+    text-shadow: none;
+  }
+
+  18% {
+    color: rgba(176, 99, 72, 0.72);
+    opacity: 0.72;
+    transform: translateY(0);
+    text-shadow:
+      0 0 0.2em rgba(210, 76, 48, 0.26),
+      0 0 0.46em rgba(193, 118, 63, 0.18);
+  }
+
+  58% {
+    color: #ffdba3;
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow:
+      0 0 0.34em rgba(255, 88, 46, 0.58),
+      0 0 0.82em rgba(226, 153, 72, 0.44);
+  }
+
+  100% {
+    color: var(--description-final-color);
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow:
+      0 0 0.12em rgba(215, 98, 58, 0.16),
+      0 0 0.3em rgba(215, 169, 102, 0.13);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .descriptionReveal[data-revealed='true'] .descriptionRevealWord {
+    animation: none;
+    color: var(--description-final-color);
+    opacity: 1;
+    transform: none;
+    text-shadow: none;
+  }
+}
+
+/* Final hero spacing and adaptive SVG-size safety. */
+.heroScrubHero {
+  --hero-title-first-line-top: 50.65%;
+  --hero-title-second-line-top: 56.15%;
+}
+
+.heroScrubHero .heroTitleLeft {
+  top: var(--hero-title-first-line-top) !important;
+}
+
+.heroScrubHero .heroTitleRight {
+  top: var(--hero-title-second-line-top) !important;
+}
+
+.titleObjectSlot {
+  --adaptive-title-object-scale: 0.92;
+}
+
+.titleObjectSlot .titleInlineObject {
+  width: calc(var(--title-object-width) * var(--adaptive-title-object-scale)) !important;
+  height: auto !important;
+}
+
+@media (max-width: 980px) {
+  .titleObjectSlot {
+    --adaptive-title-object-scale: 0.72;
+  }
+}
+
+@media (max-width: 640px) {
+  .titleObjectSlot {
+    --adaptive-title-object-scale: 0.6;
+  }
+
+  .phoneTitle {
+    --title-spread-scale: 0.58;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroScrubHero {
+    --hero-title-first-line-top: 48.65%;
+    --hero-title-second-line-top: 52.4%;
+  }
+
+  .titleObjectSlot {
+    --adaptive-title-object-scale: 0.54;
+  }
+
+  .phoneTitle {
+    --title-spread-scale: 0.46;
+  }
+}
+
+/* Final shared description frame: match the Today section across all phone screens. */
+.todayStandaloneSection,
+.planningSection,
+.clockSection,
+.laSection {
+  --phone-description-frame-width: var(--phone-copy-column-width);
+}
+
+.todayStandaloneCopy .descriptionReveal,
+.planningCopy .descriptionReveal,
+.clockCopy .descriptionReveal,
+.laCopy .descriptionReveal {
+  width: var(--phone-description-frame-width) !important;
+  max-width: var(--phone-description-frame-width) !important;
+}
+
+.todayStandaloneCopy .descriptionReveal p,
+.planningCopy .descriptionReveal p,
+.clockCopy .descriptionReveal p,
+.laCopy .descriptionReveal p,
+.todayStandaloneCopy .descriptionRevealWord,
+.planningCopy .descriptionRevealWord,
+.clockCopy .descriptionRevealWord,
+.laCopy .descriptionRevealWord {
+  font-weight: 500 !important;
+}
+
+@media (max-width: 980px) {
+  .todayStandaloneSection,
+  .planningSection,
+  .clockSection,
+  .laSection {
+    --phone-description-frame-width: 100%;
+  }
+}
