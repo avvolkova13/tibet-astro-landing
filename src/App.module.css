@@ -5715,3 +5715,71 @@
     text-align: left !important;
   }
 }
+
+/* Mobile text safety: prevent titles/copy from being visually clipped on narrow devices. */
+@media (max-width: 768px) {
+  .heroScrubHero .heroTitle {
+    left: 50% !important;
+    right: auto !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    overflow: visible !important;
+    transform: translateX(-50%) !important;
+    font-size: clamp(1.5rem, 6.6vw, 2rem) !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.045em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  .heroScrubHero .heroCopy,
+  .heroScrubHero .heroCopyReveal,
+  .heroScrubHero .heroCopyReveal p {
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    text-wrap: balance;
+  }
+
+  .todayStandaloneSection .todayStandaloneCopy,
+  .planningSection .planningCopy,
+  .clockSection .clockCopy,
+  .laSection .laCopy {
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+    overflow: visible !important;
+  }
+
+  .todayStandaloneCopy h2,
+  .planningCopy h2,
+  .clockCopy h2,
+  .laCopy h2,
+  .phoneTitle,
+  .phoneTitle .phoneTitleLine {
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroScrubHero .heroTitle {
+    width: calc(100vw - 18px) !important;
+    max-width: calc(100vw - 18px) !important;
+    font-size: clamp(1.42rem, 6.15vw, 1.78rem) !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .heroScrubHero .heroCopy,
+  .heroScrubHero .heroCopyReveal,
+  .heroScrubHero .heroCopyReveal p {
+    width: calc(100vw - 28px) !important;
+    max-width: calc(100vw - 28px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .heroScrubHero .heroTitle {
+    font-size: clamp(1.28rem, 6vw, 1.55rem) !important;
+  }
+}
