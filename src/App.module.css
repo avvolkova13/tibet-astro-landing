@@ -5760,6 +5760,11 @@
     max-width: 100% !important;
     overflow: visible !important;
   }
+
+  .clockCopy .titleObjectSlot {
+    margin-inline: 0.04em !important;
+    padding-inline: 6px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -5775,6 +5780,11 @@
   .heroScrubHero .heroCopyReveal p {
     width: calc(100vw - 28px) !important;
     max-width: calc(100vw - 28px) !important;
+  }
+
+  .clockCopy .titleObjectSlot {
+    margin-inline: 0.02em !important;
+    padding-inline: 3px !important;
   }
 }
 
