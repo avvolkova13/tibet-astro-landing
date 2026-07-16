@@ -5796,6 +5796,10 @@
 
 /* Mobile Hero CTA safety: keep store buttons above browser controls and reduce title/copy gap. */
 @media (max-width: 768px) {
+  .heroScrubHero .heroArrow {
+    display: none !important;
+  }
+
   .heroScrubHero .heroTitleLeft {
     top: 45.5% !important;
   }
